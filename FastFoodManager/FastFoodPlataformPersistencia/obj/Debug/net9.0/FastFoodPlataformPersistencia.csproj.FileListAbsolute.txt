@@ -1,0 +1,17 @@
+C:\Dev\Fast Food Restaurant Management System\FastFoodManager\FastFoodPlataformPersistencia\bin\Debug\net9.0\FastFoodPlataformPersistencia.deps.json
+C:\Dev\Fast Food Restaurant Management System\FastFoodManager\FastFoodPlataformPersistencia\bin\Debug\net9.0\FastFoodPlataformPersistencia.runtimeconfig.json
+C:\Dev\Fast Food Restaurant Management System\FastFoodManager\FastFoodPlataformPersistencia\bin\Debug\net9.0\FastFoodPlataformPersistencia.dll
+C:\Dev\Fast Food Restaurant Management System\FastFoodManager\FastFoodPlataformPersistencia\bin\Debug\net9.0\FastFoodPlataformPersistencia.pdb
+C:\Dev\Fast Food Restaurant Management System\FastFoodManager\FastFoodPlataformPersistencia\obj\Debug\net9.0\FastFoodPlataformPersistencia.csproj.AssemblyReference.cache
+C:\Dev\Fast Food Restaurant Management System\FastFoodManager\FastFoodPlataformPersistencia\obj\Debug\net9.0\FastFoodPlataformPersistencia.GeneratedMSBuildEditorConfig.editorconfig
+C:\Dev\Fast Food Restaurant Management System\FastFoodManager\FastFoodPlataformPersistencia\obj\Debug\net9.0\FastFoodPlataformPersistencia.AssemblyInfoInputs.cache
+C:\Dev\Fast Food Restaurant Management System\FastFoodManager\FastFoodPlataformPersistencia\obj\Debug\net9.0\FastFoodPlataformPersistencia.AssemblyInfo.cs
+C:\Dev\Fast Food Restaurant Management System\FastFoodManager\FastFoodPlataformPersistencia\obj\Debug\net9.0\FastFoodPlataformPersistencia.csproj.CoreCompileInputs.cache
+C:\Dev\Fast Food Restaurant Management System\FastFoodManager\FastFoodPlataformPersistencia\obj\Debug\net9.0\FastFoodPlataformPersistencia.dll
+C:\Dev\Fast Food Restaurant Management System\FastFoodManager\FastFoodPlataformPersistencia\obj\Debug\net9.0\refint\FastFoodPlataformPersistencia.dll
+C:\Dev\Fast Food Restaurant Management System\FastFoodManager\FastFoodPlataformPersistencia\obj\Debug\net9.0\FastFoodPlataformPersistencia.pdb
+C:\Dev\Fast Food Restaurant Management System\FastFoodManager\FastFoodPlataformPersistencia\obj\Debug\net9.0\FastFoodPlataformPersistencia.genruntimeconfig.cache
+C:\Dev\Fast Food Restaurant Management System\FastFoodManager\FastFoodPlataformPersistencia\obj\Debug\net9.0\ref\FastFoodPlataformPersistencia.dll
+C:\Dev\Fast Food Restaurant Management System\FastFoodManager\FastFoodPlataformPersistencia\bin\Debug\net9.0\FastFoodManagerPlataformDomain.dll
+C:\Dev\Fast Food Restaurant Management System\FastFoodManager\FastFoodPlataformPersistencia\bin\Debug\net9.0\FastFoodManagerPlataformDomain.pdb
+C:\Dev\Fast Food Restaurant Management System\FastFoodManager\FastFoodPlataformPersistencia\obj\Debug\net9.0\FastFood.30720701.Up2Date

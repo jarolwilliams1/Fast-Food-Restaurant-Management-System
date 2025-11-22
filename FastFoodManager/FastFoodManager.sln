@@ -1,0 +1,50 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36616.10 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "API", "API", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{BD284C1A-E750-4FC6-BEDC-0FFB9AA3D93C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Insfraestructure", "Insfraestructure", "{BC9E7198-3255-4E2E-B4AC-93D797488FDB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{CDAB7893-8038-4574-AED7-4B3EB667D2E0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Login", "Login\Login.csproj", "{3EBDF643-FCCB-42F1-AA30-19089DC70D51}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FastFoodManagerPlataformDomain", "FastFoodManagerPlataformDomain\FastFoodManagerPlataformDomain.csproj", "{4A9396EB-6076-4C69-BA15-571211840B78}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FastFoodPlataformPersistencia", "FastFoodPlataformPersistencia\FastFoodPlataformPersistencia.csproj", "{BDA3D63B-4370-40B3-BA44-41369DE6DB1F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3EBDF643-FCCB-42F1-AA30-19089DC70D51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3EBDF643-FCCB-42F1-AA30-19089DC70D51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3EBDF643-FCCB-42F1-AA30-19089DC70D51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3EBDF643-FCCB-42F1-AA30-19089DC70D51}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A9396EB-6076-4C69-BA15-571211840B78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A9396EB-6076-4C69-BA15-571211840B78}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A9396EB-6076-4C69-BA15-571211840B78}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A9396EB-6076-4C69-BA15-571211840B78}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BDA3D63B-4370-40B3-BA44-41369DE6DB1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDA3D63B-4370-40B3-BA44-41369DE6DB1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDA3D63B-4370-40B3-BA44-41369DE6DB1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDA3D63B-4370-40B3-BA44-41369DE6DB1F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3EBDF643-FCCB-42F1-AA30-19089DC70D51} = {CDAB7893-8038-4574-AED7-4B3EB667D2E0}
+		{4A9396EB-6076-4C69-BA15-571211840B78} = {BD284C1A-E750-4FC6-BEDC-0FFB9AA3D93C}
+		{BDA3D63B-4370-40B3-BA44-41369DE6DB1F} = {BC9E7198-3255-4E2E-B4AC-93D797488FDB}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0BE32470-9FFA-4D05-B7CC-008BBAA502DB}
+	EndGlobalSection
+EndGlobal

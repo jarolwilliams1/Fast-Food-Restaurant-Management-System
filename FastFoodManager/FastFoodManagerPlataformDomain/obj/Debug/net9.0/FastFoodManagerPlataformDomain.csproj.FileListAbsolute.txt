@@ -1,0 +1,14 @@
+C:\Dev\Fast Food Restaurant Management System\FastFoodManager\FastFoodManagerPlataformDomain\bin\Debug\net9.0\FastFoodManagerPlataformDomain.deps.json
+C:\Dev\Fast Food Restaurant Management System\FastFoodManager\FastFoodManagerPlataformDomain\bin\Debug\net9.0\FastFoodManagerPlataformDomain.runtimeconfig.json
+C:\Dev\Fast Food Restaurant Management System\FastFoodManager\FastFoodManagerPlataformDomain\bin\Debug\net9.0\FastFoodManagerPlataformDomain.dll
+C:\Dev\Fast Food Restaurant Management System\FastFoodManager\FastFoodManagerPlataformDomain\bin\Debug\net9.0\FastFoodManagerPlataformDomain.pdb
+C:\Dev\Fast Food Restaurant Management System\FastFoodManager\FastFoodManagerPlataformDomain\obj\Debug\net9.0\FastFoodManagerPlataformDomain.csproj.AssemblyReference.cache
+C:\Dev\Fast Food Restaurant Management System\FastFoodManager\FastFoodManagerPlataformDomain\obj\Debug\net9.0\FastFoodManagerPlataformDomain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Dev\Fast Food Restaurant Management System\FastFoodManager\FastFoodManagerPlataformDomain\obj\Debug\net9.0\FastFoodManagerPlataformDomain.AssemblyInfoInputs.cache
+C:\Dev\Fast Food Restaurant Management System\FastFoodManager\FastFoodManagerPlataformDomain\obj\Debug\net9.0\FastFoodManagerPlataformDomain.AssemblyInfo.cs
+C:\Dev\Fast Food Restaurant Management System\FastFoodManager\FastFoodManagerPlataformDomain\obj\Debug\net9.0\FastFoodManagerPlataformDomain.csproj.CoreCompileInputs.cache
+C:\Dev\Fast Food Restaurant Management System\FastFoodManager\FastFoodManagerPlataformDomain\obj\Debug\net9.0\FastFoodManagerPlataformDomain.dll
+C:\Dev\Fast Food Restaurant Management System\FastFoodManager\FastFoodManagerPlataformDomain\obj\Debug\net9.0\refint\FastFoodManagerPlataformDomain.dll
+C:\Dev\Fast Food Restaurant Management System\FastFoodManager\FastFoodManagerPlataformDomain\obj\Debug\net9.0\FastFoodManagerPlataformDomain.pdb
+C:\Dev\Fast Food Restaurant Management System\FastFoodManager\FastFoodManagerPlataformDomain\obj\Debug\net9.0\FastFoodManagerPlataformDomain.genruntimeconfig.cache
+C:\Dev\Fast Food Restaurant Management System\FastFoodManager\FastFoodManagerPlataformDomain\obj\Debug\net9.0\ref\FastFoodManagerPlataformDomain.dll
