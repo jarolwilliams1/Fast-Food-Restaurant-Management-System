@@ -8,15 +8,15 @@ namespace FastFoodManagerPlataformDomain.Entites {
     {
         public int Id { get; set; }
 
-        public string Nombre { get; set; } = "jarol";
+        public string Nombre { get; set; } 
 
-        public string Apellido { get; set; } = "williams";
+        public string Apellido { get; set; } 
 
-        public string Usuario { get; set; } = "jarol2102";
+        public string Usuario { get; set; }
 
-        public string Passwordd { get; set; } = "12345";
+        public string Passwordd { get; set; } 
 
-        public string Rol { get; set; } = "Gerente";
+        public string Rol { get; set; } 
 
         public virtual ICollection<Pedido> Pedidos { get; set; } = new List<Pedido>();
     }

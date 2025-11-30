@@ -17,8 +17,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FastFoodPlataformPersistenc
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Aplication", "Aplication", "{83022D2B-3A2E-40F2-9214-01C817A9E7AF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FastFoodAplication", "FastFoodAplication\FastFoodAplication.csproj", "{151CAA66-0B65-429D-ADF6-34A5ECA76DAF}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Login", "Login", "{44943C8E-E40E-4301-8C7B-90C339384FF6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FastFoodManagerWebApplication", "FastFoodManagerWebApplication\FastFoodManagerWebApplication.csproj", "{942EE9DC-235F-443E-B42F-561BA67D4541}"
@@ -29,6 +27,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Elementos de la solución",
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FastFoodManagerApp", "FastFoodManagerApp\FastFoodManagerApp.csproj", "{D8F54D97-D0E8-4A92-A57F-1D186CC28135}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -44,10 +44,6 @@ Global
 		{BDA3D63B-4370-40B3-BA44-41369DE6DB1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BDA3D63B-4370-40B3-BA44-41369DE6DB1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BDA3D63B-4370-40B3-BA44-41369DE6DB1F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{151CAA66-0B65-429D-ADF6-34A5ECA76DAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{151CAA66-0B65-429D-ADF6-34A5ECA76DAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{151CAA66-0B65-429D-ADF6-34A5ECA76DAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{151CAA66-0B65-429D-ADF6-34A5ECA76DAF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{942EE9DC-235F-443E-B42F-561BA67D4541}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{942EE9DC-235F-443E-B42F-561BA67D4541}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{942EE9DC-235F-443E-B42F-561BA67D4541}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -56,6 +52,10 @@ Global
 		{15F271EF-5CBC-4903-AB80-84B39A92C040}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{15F271EF-5CBC-4903-AB80-84B39A92C040}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{15F271EF-5CBC-4903-AB80-84B39A92C040}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8F54D97-D0E8-4A92-A57F-1D186CC28135}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8F54D97-D0E8-4A92-A57F-1D186CC28135}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8F54D97-D0E8-4A92-A57F-1D186CC28135}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8F54D97-D0E8-4A92-A57F-1D186CC28135}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -63,10 +63,10 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{4A9396EB-6076-4C69-BA15-571211840B78} = {BD284C1A-E750-4FC6-BEDC-0FFB9AA3D93C}
 		{BDA3D63B-4370-40B3-BA44-41369DE6DB1F} = {BC9E7198-3255-4E2E-B4AC-93D797488FDB}
-		{151CAA66-0B65-429D-ADF6-34A5ECA76DAF} = {83022D2B-3A2E-40F2-9214-01C817A9E7AF}
 		{44943C8E-E40E-4301-8C7B-90C339384FF6} = {CDAB7893-8038-4574-AED7-4B3EB667D2E0}
 		{942EE9DC-235F-443E-B42F-561BA67D4541} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{15F271EF-5CBC-4903-AB80-84B39A92C040} = {44943C8E-E40E-4301-8C7B-90C339384FF6}
+		{D8F54D97-D0E8-4A92-A57F-1D186CC28135} = {83022D2B-3A2E-40F2-9214-01C817A9E7AF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0BE32470-9FFA-4D05-B7CC-008BBAA502DB}

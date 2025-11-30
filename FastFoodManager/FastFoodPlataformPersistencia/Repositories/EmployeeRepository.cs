@@ -7,7 +7,7 @@ namespace FastFoodPlataformPersistencia.Repositories
 {
     public class EmployeeRepository : IEmployeeRepository
     {
-        private readonly FastFoodManagerDBContext _context;
+         private readonly  FastFoodManagerDBContext  _context;
         public EmployeeRepository(FastFoodManagerDBContext context)
         { 
         
