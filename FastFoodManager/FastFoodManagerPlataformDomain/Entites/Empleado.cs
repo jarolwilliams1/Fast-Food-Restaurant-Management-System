@@ -4,19 +4,19 @@ using System;
 using System.Collections.Generic;
 
 namespace FastFoodManagerPlataformDomain.Entites {
-    public partial class Empleado
+    public  class Empleado
     {
         public int Id { get; set; }
 
-        public string Nombre { get; set; }
+        public string Nombre { get; set; } = "jarol";
 
-        public string Apellido { get; set; }
+        public string Apellido { get; set; } = "williams";
 
-        public string Usuario { get; set; }
+        public string Usuario { get; set; } = "jarol2102";
 
-        public string Passwordd { get; set; }
+        public string Passwordd { get; set; } = "12345";
 
-        public string Rol { get; set; }
+        public string Rol { get; set; } = "Gerente";
 
         public virtual ICollection<Pedido> Pedidos { get; set; } = new List<Pedido>();
     }

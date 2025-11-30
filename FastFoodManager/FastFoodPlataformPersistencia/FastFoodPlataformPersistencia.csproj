@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FastFoodManagerPlataformDomain\FastFoodManagerPlataformDomain.csproj" />
+    <ProjectReference Include="..\FastFoodManagerWebApplication\FastFoodManagerWebApplication.csproj" />
   </ItemGroup>
 
 </Project>

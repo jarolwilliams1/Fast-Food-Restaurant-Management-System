@@ -6,6 +6,7 @@ using System.Collections.Generic;
 namespace FastFoodManagerPlataformDomain.Entites
 {
 
+
     public class CarritoItem
     {
         public int Id { get; set; }

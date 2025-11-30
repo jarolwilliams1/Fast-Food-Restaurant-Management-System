@@ -1,0 +1,6 @@
+@FastFoodManagerWebApplication_HostAddress = http://localhost:5194
+
+GET {{FastFoodManagerWebApplication_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

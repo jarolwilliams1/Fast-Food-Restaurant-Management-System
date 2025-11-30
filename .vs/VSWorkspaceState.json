@@ -1,4 +1,9 @@
 {
-  "ExpandedNodes": [],
+  "ExpandedNodes": [
+    "",
+    "\\.github\\workflows",
+    "\\FastFoodManager"
+  ],
+  "SelectedNode": "\\FastFoodManager",
   "PreviewInSolutionExplorer": false
 }

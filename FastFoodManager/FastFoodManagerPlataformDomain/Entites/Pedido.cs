@@ -10,7 +10,7 @@ namespace FastFoodManagerPlataformDomain.Entites {
 
         public DateTime Fecha { get; set; }
 
-        public int? ClienteId { get; set; }
+        public int ClienteId { get; set; }
 
         public int EmpleadoId { get; set; }
 

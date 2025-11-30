@@ -12,3 +12,4 @@ C:\Dev\Fast Food Restaurant Management System\FastFoodManager\FastFoodManagerPla
 C:\Dev\Fast Food Restaurant Management System\FastFoodManager\FastFoodManagerPlataformDomain\obj\Debug\net9.0\FastFoodManagerPlataformDomain.pdb
 C:\Dev\Fast Food Restaurant Management System\FastFoodManager\FastFoodManagerPlataformDomain\obj\Debug\net9.0\FastFoodManagerPlataformDomain.genruntimeconfig.cache
 C:\Dev\Fast Food Restaurant Management System\FastFoodManager\FastFoodManagerPlataformDomain\obj\Debug\net9.0\ref\FastFoodManagerPlataformDomain.dll
+C:\Dev\Fast Food Restaurant Management System\FastFoodManager\FastFoodManagerPlataformDomain\obj\Debug\net9.0\FastFoodManagerPlataformDomain.sourcelink.json
