@@ -8,14 +8,13 @@ namespace FastFoodPlataformPersistencia.Repositories
     public class EmployeeRepository : IEmployeeRepository
     {
          private readonly  FastFoodManagerDBContext  _context;
-        public EmployeeRepository(FastFoodManagerDBContext context)
-        { 
-        
-            _context = context;
-        
+       
+
+        public EmployeeRepository(FastFoodManagerDBContext dbcontexrt)
+        {
+            _context = dbcontexrt;
         }
 
-     
         public  async void Add(Empleado e)
         {
             _context.Empleados.Add(e);

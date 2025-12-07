@@ -10,35 +10,29 @@ using System.Threading.Tasks;
 namespace FastFoodManagerApp.Services
 {
    
-        //public virtual void Registrar(string usuario, string contraseña)
-        //{
-        //    throw new NotImplementedException();
-        //}
 
         public class RegistrarEmpleados : IRegistrarServices
 
         {
 
-            private readonly EmployeeRepository _repo = null!;
-        private readonly IRegistrarServices _services = null!;
+        //private readonly IRegistrarServices _services ;
+
+        private readonly EmployeeRepository _repo;
 
 
-        public RegistrarEmpleados()
+       
+        //public RegistrarEmpleados(IRegistrarServices services)
+        //{
+        //    _services = services;
+        //} 
+
+
+        public RegistrarEmpleados(EmployeeRepository repo)
         {
-        }
+            _repo = repo;
+        } 
 
-        public RegistrarEmpleados(IRegistrarServices services)
-            {
-                _services = services;
-
-            }
-
-            public RegistrarEmpleados(EmployeeRepository repo)
-            {
-                _repo = repo;
-            }
-
-            public void Registrar(string usuario, string Contraseña)
+        public void Registrar(string usuario, string Contraseña)
             {
             if (string.IsNullOrEmpty(usuario) || string.IsNullOrEmpty(Contraseña))
             {
@@ -48,7 +42,6 @@ namespace FastFoodManagerApp.Services
 
 
                 _repo.Add(Re);
-                // throw new Exception("Hubo un error");
 
 
             }
