@@ -8,12 +8,10 @@ namespace LoginEmpleado
 {
     public partial class Form1 : Form
     {
+        private readonly IRegistrarServices _registrarServices;
+       
 
-        private readonly FastFoodManagerDBContext _context;
-        private readonly EmployeeRepository _repo;
-        private readonly RegistrarEmpleados _servicio;
-
-        private bool VerContraseña = false;
+        //private bool VerContraseña = false;
 
 
 
@@ -21,9 +19,7 @@ namespace LoginEmpleado
         {
 
             InitializeComponent();
-            _context = new FastFoodManagerDBContext();
-            _repo = new EmployeeRepository(_context);
-            _servicio = new RegistrarEmpleados(_repo);
+            //_registrarServices = servicio;
 
         }
 
@@ -31,12 +27,7 @@ namespace LoginEmpleado
         private void button1_Click(object sender, EventArgs e)
         {
 
-            string usuario = textBox1.Text;
-            string contraseña = textBox2.Text;
-
-            _servicio.Registrar(usuario, contraseña);
-
-            MessageBox.Show("Guardado!");
+           
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -86,11 +77,16 @@ namespace LoginEmpleado
 
             //var  ResgistarNuevos = new ResgistarNuevos();
             //var ren = ResgistarNuevos.ActiveForm;
-            //this.Hide();
+           this.Hide();
 
             var ResgistarNuevos = new ResgistarNuevos();
+                ResgistarNuevos.Show();
 
-            ResgistarNuevos.Show();
+           // Application.Exit();
+
+
+
+
             //this.Hide();
 
 
@@ -98,11 +94,9 @@ namespace LoginEmpleado
             //bool verEste = true;
 
 
-            //if (verEste )
-            //{
-            //    this.Show();
+            //this.Show();
 
-            //}
+
 
             //this.Show();
             // ResgistarNuevos.ActiveForm

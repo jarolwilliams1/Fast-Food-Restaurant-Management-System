@@ -40,7 +40,9 @@ namespace FastFoodPlataformPersistencia.Repositories
 
         public Empleado GetById(Empleado e)
         {
+
             return _context.Empleados.FirstOrDefault(e);
+
         }
 
        

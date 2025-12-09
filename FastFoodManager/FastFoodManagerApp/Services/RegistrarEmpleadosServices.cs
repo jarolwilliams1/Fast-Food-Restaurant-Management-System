@@ -15,36 +15,54 @@ namespace FastFoodManagerApp.Services
 
         {
 
-        //private readonly IRegistrarServices _services ;
+        private readonly IRegistrarServices _services;
 
-        private readonly EmployeeRepository _repo;
-
+        private readonly EmployeeRepository _repo ;
 
        
-        //public RegistrarEmpleados(IRegistrarServices services)
-        //{
-        //    _services = services;
-        //} 
+
+
+
+        public RegistrarEmpleados(IRegistrarServices services)
+        {
+            _services = services;
+        }
 
 
         public RegistrarEmpleados(EmployeeRepository repo)
         {
             _repo = repo;
-        } 
+        }
 
-        public void Registrar(string usuario, string Contraseña)
+        public void Registrar(string Name, string apellido, string Pasword, string Rol, string usuario,ref bool Confirmar)
             {
-            if (string.IsNullOrEmpty(usuario) || string.IsNullOrEmpty(Contraseña))
+            try
             {
-                throw new Exception("Los Campos no pueden estar VACIOS!");
-            }
-            var Re = new Empleado { Usuario = usuario, Passwordd = Contraseña };
+                if (string.IsNullOrEmpty(usuario) || string.IsNullOrEmpty(Pasword) || string.IsNullOrEmpty(Rol) || string.IsNullOrEmpty(apellido) || string.IsNullOrEmpty(Name))
+                {
+                    Confirmar = false;
+                    throw new Exception("Los Campos no pueden estar VACIOS!");
+                }
+                else
+                {
+                    Confirmar = true;
+                }
+
+                var Re = new Empleado { Usuario = usuario, Passwordd = Pasword, Rol = Rol, Apellido = apellido, Nombre = Name };
 
 
                 _repo.Add(Re);
-
+            }
+            catch (Exception) 
+            {
+                Confirmar = false;
+                //throw new Exception("Hubo un error, intente nuevamente");
+                
 
             }
+
+
+        }
 
 
 
