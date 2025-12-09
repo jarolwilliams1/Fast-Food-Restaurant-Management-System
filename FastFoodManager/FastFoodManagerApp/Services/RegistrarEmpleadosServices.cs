@@ -71,7 +71,11 @@ namespace FastFoodManagerApp.Services
 
         public void IniciarSecion(string usuario, string contraseña)
         {
-
+            var bol = true;
+            if (bol)
+            {
+                throw new Exception();
+            }
         }
 
     }
