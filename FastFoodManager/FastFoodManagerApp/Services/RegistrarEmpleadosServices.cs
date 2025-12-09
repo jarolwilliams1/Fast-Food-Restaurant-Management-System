@@ -9,17 +9,17 @@ using System.Threading.Tasks;
 
 namespace FastFoodManagerApp.Services
 {
-   
 
-        public class RegistrarEmpleados : IRegistrarServices
 
-        {
+    public class RegistrarEmpleados : IRegistrarServices
+
+    {
 
         private readonly IRegistrarServices _services;
 
-        private readonly EmployeeRepository _repo ;
+        private readonly EmployeeRepository _repo;
 
-       
+
 
 
 
@@ -34,8 +34,8 @@ namespace FastFoodManagerApp.Services
             _repo = repo;
         }
 
-        public void Registrar(string Name, string apellido, string Pasword, string Rol, string usuario,ref bool Confirmar)
-            {
+        public void Registrar(string Name, string apellido, string Pasword, string Rol, string usuario, ref bool Confirmar)
+        {
             try
             {
                 if (string.IsNullOrEmpty(usuario) || string.IsNullOrEmpty(Pasword) || string.IsNullOrEmpty(Rol) || string.IsNullOrEmpty(apellido) || string.IsNullOrEmpty(Name))
@@ -46,6 +46,7 @@ namespace FastFoodManagerApp.Services
                 else
                 {
                     Confirmar = true;
+
                 }
 
                 var Re = new Empleado { Usuario = usuario, Passwordd = Pasword, Rol = Rol, Apellido = apellido, Nombre = Name };
@@ -53,11 +54,11 @@ namespace FastFoodManagerApp.Services
 
                 _repo.Add(Re);
             }
-            catch (Exception) 
+            catch (Exception)
             {
                 Confirmar = false;
                 //throw new Exception("Hubo un error, intente nuevamente");
-                
+
 
             }
 
@@ -66,7 +67,13 @@ namespace FastFoodManagerApp.Services
 
 
 
+
+
+        public void IniciarSecion(string usuario, string contraseña)
+        {
+
         }
 
     }
+}
 
