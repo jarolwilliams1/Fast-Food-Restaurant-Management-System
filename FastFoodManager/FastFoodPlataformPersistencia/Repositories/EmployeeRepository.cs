@@ -2,6 +2,7 @@
 using FastFoodManagerPlataformDomain.Entites;
 using FastFoodManagerPlataformDomain.Interfaces;
 using FastFoodPlataformPersistencia.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace FastFoodPlataformPersistencia.Repositories
 {
@@ -40,11 +41,28 @@ namespace FastFoodPlataformPersistencia.Repositories
 
         public Empleado GetById(Empleado e)
         {
+            //var numerosPares2 = (from n in 
+            //                     where n.Nombre == e.nombre
+            //                     select n).ToList();
+
+           // var numerosPares = e.Where(n => n % 2 == 0);
+
 
             return _context.Empleados.FirstOrDefault(e);
 
+
         }
 
-       
+        public void Entrar(string usuario, string contraseña)
+        {
+            var ususarioEncontrr = _context.Empleados.FirstOrDefault(e => e.Usuario == usuario
+
+            && e.Passwordd == contraseña
+
+            );
+
+        }
+
+
     }
 }

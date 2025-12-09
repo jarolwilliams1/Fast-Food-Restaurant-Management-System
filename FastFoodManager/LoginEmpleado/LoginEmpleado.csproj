@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FastFoodManagerApp\FastFoodManagerApp.csproj" />
+    <ProjectReference Include="..\Menu\Menu.csproj" />
   </ItemGroup>
 
 </Project>

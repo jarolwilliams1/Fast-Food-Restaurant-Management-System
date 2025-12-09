@@ -3,13 +3,18 @@ using FastFoodManagerApp.Interfaces;
 using FastFoodManagerApp.Services;
 using FastFoodPlataformPersistencia.Context;
 using FastFoodPlataformPersistencia.Repositories;
+using Menu;
+using Microsoft.EntityFrameworkCore;
 
 namespace LoginEmpleado
 {
     public partial class Form1 : Form
     {
-        private readonly IRegistrarServices _registrarServices;
-       
+        private readonly IRegistrarServices _IregistrarServices;
+        private readonly RegistrarEmpleados _services;
+        private readonly EmployeeRepository _employeeRepository;
+        private readonly FastFoodManagerDBContext _dbContext;
+
 
         //private bool VerContraseña = false;
 
@@ -19,16 +24,14 @@ namespace LoginEmpleado
         {
 
             InitializeComponent();
-            //_registrarServices = servicio;
-
+            _dbContext = new FastFoodManagerDBContext();
+            _employeeRepository = new EmployeeRepository(_dbContext);
+            _services = new RegistrarEmpleados(_employeeRepository);
         }
+        
 
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-           
-        }
+      
 
         private void label2_Click(object sender, EventArgs e)
         {
@@ -47,10 +50,23 @@ namespace LoginEmpleado
 
         private void button2_Click(object sender, EventArgs e)
         {
+            var ususario = textBox1.Text;
+            var contraseña = textBox2.Text;
+            RegistrarEmpleados logear = new RegistrarEmpleados(_IregistrarServices);
+            var v = logear.IntentarLogin(ususario, contraseña);
+
+            if (v == true)
+            {
+                Menus menu = new Menus();
+                menu.Show();
+            }
+            else
+            {
+                MessageBox.Show("ususario o contraseña incorrecto");
+            }
             //var contraseña = textBox2.Show;
             //var  contraseña = "";
-            var contraseña = textBox2.Text.ToString();
-            textBox2.Text = contraseña;
+
             //VerContraseña = true; 
 
             //if (VerContraseña)
@@ -112,5 +128,24 @@ namespace LoginEmpleado
         {
 
         }
+        //private void button1_Click(object sender, EventArgs e, RegistrarEmpleados registrarEmpleados)
+        //{
+        //    var ususario = textBox1.Text;
+        //    var contraseña = textBox2.Text;
+        //    var v = registrarEmpleados.IntentarLogin(ususario, contraseña);
+
+        //    if (v == true)
+        //    {
+        //          Menus menu = new Menus();
+        //        menu.Show();
+        //    }
+        //    else
+        //    {
+        //        MessageBox.Show("ususario o contraseña incorrecto");
+        //    }
+           
+            
+        //    //throw new NotImplementedException();
+        //}
     }
 }

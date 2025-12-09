@@ -10,6 +10,6 @@ namespace FastFoodManagerApp.Interfaces
     {
         void Registrar(string Name, string apellido, string Pasword, string Rol, string usuario,ref bool Confirmar);
         void IniciarSecion(string usuario, string contraseña);
-
+        bool IntentarLogin(string usuario, string contrasena);
     }
 }

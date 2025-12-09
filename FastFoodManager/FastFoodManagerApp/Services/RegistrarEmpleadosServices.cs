@@ -77,6 +77,23 @@ namespace FastFoodManagerApp.Services
             }
         }
 
+        public  bool IntentarLogin(string usuario, string contrasena)
+        {
+            _repo.Entrar(usuario, contrasena);
+
+            if (string.IsNullOrEmpty(usuario) || string.IsNullOrEmpty(contrasena))
+            {
+                return false;
+            }
+
+            else
+            {
+                return true;
+            }
+
+           // return true;
+        }
+
     }
 }
 

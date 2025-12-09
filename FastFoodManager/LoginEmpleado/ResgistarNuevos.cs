@@ -84,7 +84,6 @@ namespace LoginEmpleado
             {
                 MessageBox.Show("No se puedo crear el empleado");
 
-                MessageBox.Show("No se puedo crear el empleado");
 
             }
 

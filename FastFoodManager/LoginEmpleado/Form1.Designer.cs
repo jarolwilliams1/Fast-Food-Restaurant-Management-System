@@ -1,4 +1,5 @@
-﻿namespace LoginEmpleado
+﻿
+namespace LoginEmpleado
 {
     partial class Form1
     {
@@ -50,7 +51,7 @@
             button1.TabIndex = 0;
             button1.Text = "Inicar seción";
             button1.UseVisualStyleBackColor = false;
-            button1.Click += button1_Click;
+            button1.Click += button2_Click;
             // 
             // label2
             // 
@@ -143,6 +144,8 @@
             ResumeLayout(false);
             PerformLayout();
         }
+
+       
 
         #endregion
 
