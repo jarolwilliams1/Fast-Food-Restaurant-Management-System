@@ -74,7 +74,6 @@ namespace FastFoodManagerApp.Services
             var bol = true;
             if (bol)
             {
-                throw new Exception();
             }
         }
 
