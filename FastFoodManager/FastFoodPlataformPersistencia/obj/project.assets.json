@@ -1631,6 +1631,16 @@
           }
         }
       },
+      "Admin/1.0.0": {
+        "type": "project",
+        "framework": "Unsupported,Version=v0.0",
+        "compile": {
+          "bin/placeholder/Admin.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Admin.dll": {}
+        }
+      },
       "FastFoodManagerPlataformDomain/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
@@ -4795,6 +4805,11 @@
         "useSharedDesignerContext.txt"
       ]
     },
+    "Admin/1.0.0": {
+      "type": "project",
+      "path": "../Admin/Admin.csproj",
+      "msbuildProject": "../Admin/Admin.csproj"
+    },
     "FastFoodManagerPlataformDomain/1.0.0": {
       "type": "project",
       "path": "../FastFoodManagerPlataformDomain/FastFoodManagerPlataformDomain.csproj",
@@ -4808,6 +4823,7 @@
   },
   "projectFileDependencyGroups": {
     "net9.0": [
+      "Admin >= 1.0.0",
       "FastFoodManagerPlataformDomain >= 1.0.0",
       "FastFoodManagerWebApplication >= 1.0.0",
       "Microsoft.EntityFrameworkCore >= 9.0.0",
@@ -4848,6 +4864,9 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
+            "C:\\Dev\\Fast Food Restaurant Management System\\FastFoodManager\\Admin\\Admin.csproj": {
+              "projectPath": "C:\\Dev\\Fast Food Restaurant Management System\\FastFoodManager\\Admin\\Admin.csproj"
+            },
             "C:\\Dev\\Fast Food Restaurant Management System\\FastFoodManager\\FastFoodManagerPlataformDomain\\FastFoodManagerPlataformDomain.csproj": {
               "projectPath": "C:\\Dev\\Fast Food Restaurant Management System\\FastFoodManager\\FastFoodManagerPlataformDomain\\FastFoodManagerPlataformDomain.csproj"
             },
@@ -4907,5 +4926,16 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.308/PortableRuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1201",
+      "level": "Error",
+      "message": "El proyecto Admin no es compatible con net9.0 (.NETCoreApp,Version=v9.0). El proyecto Admin admite: net9.0-windows7.0 (.NETCoreApp,Version=v9.0)",
+      "libraryId": "Admin",
+      "targetGraphs": [
+        "net9.0"
+      ]
+    }
+  ]
 }

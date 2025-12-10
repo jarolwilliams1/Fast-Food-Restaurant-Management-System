@@ -39,9 +39,12 @@
             Bcaja = new Button();
             groupBoxCaja = new GroupBox();
             groupBoxMenu = new GroupBox();
+            flowCarrito = new FlowLayoutPanel();
+            flowProductos = new FlowLayoutPanel();
             sqlCommand1 = new Microsoft.Data.SqlClient.SqlCommand();
             groupBox1.SuspendLayout();
             groupBoxCaja.SuspendLayout();
+            groupBoxMenu.SuspendLayout();
             SuspendLayout();
             // 
             // groupBox1
@@ -168,6 +171,8 @@
             // 
             // groupBoxMenu
             // 
+            groupBoxMenu.Controls.Add(flowCarrito);
+            groupBoxMenu.Controls.Add(flowProductos);
             groupBoxMenu.Dock = DockStyle.Fill;
             groupBoxMenu.Location = new Point(3, 35);
             groupBoxMenu.Name = "groupBoxMenu";
@@ -176,6 +181,22 @@
             groupBoxMenu.TabStop = false;
             groupBoxMenu.Text = "groupBoxMenu";
             groupBoxMenu.Visible = false;
+            // 
+            // flowCarrito
+            // 
+            flowCarrito.Location = new Point(604, 89);
+            flowCarrito.Name = "flowCarrito";
+            flowCarrito.Size = new Size(400, 200);
+            flowCarrito.TabIndex = 1;
+            flowCarrito.Paint += flowCarrito_Paint;
+            // 
+            // flowProductos
+            // 
+            flowProductos.Location = new Point(30, 69);
+            flowProductos.Name = "flowProductos";
+            flowProductos.Size = new Size(400, 200);
+            flowProductos.TabIndex = 0;
+            flowProductos.Paint += flowLayoutPanel1_Paint;
             // 
             // sqlCommand1
             // 
@@ -194,6 +215,7 @@
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             groupBoxCaja.ResumeLayout(false);
+            groupBoxMenu.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -211,5 +233,7 @@
         private GroupBox groupBoxCaja;
         private GroupBox groupBoxMenu;
         private Microsoft.Data.SqlClient.SqlCommand sqlCommand1;
+        private FlowLayoutPanel flowCarrito;
+        private FlowLayoutPanel flowProductos;
     }
 }

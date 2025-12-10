@@ -4,6 +4,7 @@ using FastFoodManagerPlataformDomain.Interfaces;
 using FastFoodPlataformPersistencia.Context;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace FastFoodPlataformPersistencia.Repositories
 {
     public class EmployeeRepository : IEmployeeRepository

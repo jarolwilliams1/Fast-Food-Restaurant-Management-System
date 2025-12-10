@@ -57,6 +57,11 @@ namespace Admin.UsersControl
             lblCantidad.Text = Cantidad.ToString();
             lblTotal.Text = (Cantidad * Precio).ToString("C2");
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 
     //public partial class CarritoItem : UserControl
@@ -66,7 +71,7 @@ namespace Admin.UsersControl
     //        InitializeComponent();
     //    }
 
-   
-    }
+
+}
 
 

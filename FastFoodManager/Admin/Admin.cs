@@ -1,12 +1,63 @@
+using Admin.UsersControl;
+using Microsoft.EntityFrameworkCore;
+//using FastFoodManagerDBContext.context;
+
 namespace Admin
 {
     public partial class Form1 : Form
     {
-
+       // private readonly FastFoodManagerDBContext _dbContext;
         public Form1()
         {
             InitializeComponent();
+            flowProductos.AutoScroll = true; // Activa la barra de desplazamiento cuando los elementos sobrepasan el tamaño del panel.
+            flowCarrito.AutoScroll = true;
+            flowProductos.WrapContents = true; // para que se acomoden
         }
+        //private void Form1_Load(object sender, EventArgs e)
+
+
+      //  { 
+             public void CargarProductos()
+
+       
+        {
+
+            var productos = _dbContext.Productos.ToList();
+
+            foreach (var p in productos)
+            {
+                var card = new ProductoCard(p.Nombre, p.Precio);
+                card.OnAgregar += AgregarAlCarrito;
+                flowProductos.Controls.Add(card);
+            }
+        }
+        private void AgregarAlCarrito(string nombre, decimal precio)
+        {
+            // Ver si ya existe
+            foreach (CarritoItem item in flowCarrito.Controls)
+            {
+                if (item.Nombre == nombre)
+                {
+                    item.Cantidad++;
+                    return;
+                }
+            }
+
+            // Crear item nuevo
+            var nuevo = new CarritoItem(nombre, precio);
+            nuevo.OnEliminar += EliminarItemCarrito;
+            flowCarrito.Controls.Add(nuevo);
+        }
+        private void EliminarItemCarrito(CarritoItem item)
+        {
+            flowCarrito.Controls.Remove(item);
+        }
+    
+       // }
+        
+       
+
 
         private void Bcaja_Click(object sender, EventArgs e)
         {
@@ -49,7 +100,20 @@ namespace Admin
 
         private void vScrollBar1_Scroll(object sender, ScrollEventArgs e)
         {
+
+        }
+
+        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+           
+
+        }
+
+        private void flowCarrito_Paint(object sender, PaintEventArgs e)
+        {
             
+
         }
     }
 }
+
