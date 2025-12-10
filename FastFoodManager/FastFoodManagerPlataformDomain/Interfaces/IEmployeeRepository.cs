@@ -10,6 +10,6 @@ namespace FastFoodManagerPlataformDomain.Interfaces
         void Update(Empleado e);
          void Delete(int id);
         void Create(Empleado e);
-        void Entrar(string ususario, string contraseña);
+        Empleado Entrar(string ususario, string contraseña);
     }
 }

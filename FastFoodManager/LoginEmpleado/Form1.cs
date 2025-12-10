@@ -1,6 +1,7 @@
 
 using FastFoodManagerApp.Interfaces;
 using FastFoodManagerApp.Services;
+using FastFoodManagerPlataformDomain.Entites;
 using FastFoodPlataformPersistencia.Context;
 using FastFoodPlataformPersistencia.Repositories;
 using Menu;
@@ -14,6 +15,8 @@ namespace LoginEmpleado
         private readonly RegistrarEmpleados _services;
         private readonly EmployeeRepository _employeeRepository;
         private readonly FastFoodManagerDBContext _dbContext;
+       // private Empleado emp = new Empleado();
+
 
 
         //private bool VerContraseña = false;
@@ -50,17 +53,20 @@ namespace LoginEmpleado
 
         private void button2_Click(object sender, EventArgs e)
         {
-            var ususario = textBox1.Text;
-            var contraseña = textBox2.Text;
-            RegistrarEmpleados logear = new RegistrarEmpleados(_IregistrarServices);
-            var v = logear.IntentarLogin(ususario, contraseña);
 
-            if (v == true)
+
+            var ususario = textBox1.Text.Trim();
+            var contraseña = textBox2.Text.Trim();
+            RegistrarEmpleados logear = new RegistrarEmpleados(_employeeRepository);
+            bool v = logear.IntentarLogin(ususario, contraseña);
+
+            if (v)
             {
+                this.Hide();
                 Menus menu = new Menus();
                 menu.Show();
             }
-            else
+            else if (!v)
             {
                 MessageBox.Show("ususario o contraseña incorrecto");
             }

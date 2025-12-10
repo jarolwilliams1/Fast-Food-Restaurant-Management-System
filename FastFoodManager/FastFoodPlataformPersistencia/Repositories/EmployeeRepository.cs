@@ -53,13 +53,19 @@ namespace FastFoodPlataformPersistencia.Repositories
 
         }
 
-        public void Entrar(string usuario, string contraseña)
+        public Empleado Entrar(string usuario, string contraseña)
         {
+            Empleado e = new Empleado();
             var ususarioEncontrr = _context.Empleados.FirstOrDefault(e => e.Usuario == usuario
 
-            && e.Passwordd == contraseña
+            && e.Passwordd == contraseña);
 
-            );
+
+
+            return e;
+
+
+
 
         }
 
