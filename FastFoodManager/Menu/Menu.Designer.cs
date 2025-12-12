@@ -125,7 +125,7 @@
             groupBox5.TabIndex = 3;
             groupBox5.TabStop = false;
             // 
-            // Menu
+            // Menus
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -135,8 +135,9 @@
             Controls.Add(groupBox3);
             Controls.Add(Gpedidos);
             Controls.Add(groupBox1);
-            Name = "Menu";
+            Name = "Menus";
             Text = "Form1";
+            Load += Menus_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             Gpedidos.ResumeLayout(false);

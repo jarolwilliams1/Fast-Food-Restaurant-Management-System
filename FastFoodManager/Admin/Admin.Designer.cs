@@ -39,9 +39,9 @@
             Bcaja = new Button();
             groupBoxCaja = new GroupBox();
             groupBoxMenu = new GroupBox();
-            flowCarrito = new FlowLayoutPanel();
             flowProductos = new FlowLayoutPanel();
             sqlCommand1 = new Microsoft.Data.SqlClient.SqlCommand();
+            flowCarrito = new FlowLayoutPanel();
             groupBox1.SuspendLayout();
             groupBoxCaja.SuspendLayout();
             groupBoxMenu.SuspendLayout();
@@ -182,19 +182,11 @@
             groupBoxMenu.Text = "groupBoxMenu";
             groupBoxMenu.Visible = false;
             // 
-            // flowCarrito
-            // 
-            flowCarrito.Location = new Point(604, 89);
-            flowCarrito.Name = "flowCarrito";
-            flowCarrito.Size = new Size(400, 200);
-            flowCarrito.TabIndex = 1;
-            flowCarrito.Paint += flowCarrito_Paint;
-            // 
             // flowProductos
             // 
-            flowProductos.Location = new Point(30, 69);
+            flowProductos.Location = new Point(3, 52);
             flowProductos.Name = "flowProductos";
-            flowProductos.Size = new Size(400, 200);
+            flowProductos.Size = new Size(527, 825);
             flowProductos.TabIndex = 0;
             flowProductos.Paint += flowLayoutPanel1_Paint;
             // 
@@ -202,6 +194,14 @@
             // 
             sqlCommand1.CommandTimeout = 30;
             sqlCommand1.EnableOptimizedParameterBinding = false;
+            // 
+            // flowCarrito
+            // 
+            flowCarrito.Location = new Point(604, 89);
+            flowCarrito.Name = "flowCarrito";
+            flowCarrito.Size = new Size(400, 200);
+            flowCarrito.TabIndex = 1;
+            flowCarrito.Paint += flowCarrito_Paint;
             // 
             // Form1
             // 
@@ -233,7 +233,7 @@
         private GroupBox groupBoxCaja;
         private GroupBox groupBoxMenu;
         private Microsoft.Data.SqlClient.SqlCommand sqlCommand1;
-        private FlowLayoutPanel flowCarrito;
         private FlowLayoutPanel flowProductos;
+        private FlowLayoutPanel flowCarrito;
     }
 }

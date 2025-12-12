@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FastFoodManagerPlataformDomain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+eb345d88799caeee6adcb80657f131fa589d81ee")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7a254fde698d16f5f57c4ab3e67108048a5fc4f6")]
 [assembly: System.Reflection.AssemblyProductAttribute("FastFoodManagerPlataformDomain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FastFoodManagerPlataformDomain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

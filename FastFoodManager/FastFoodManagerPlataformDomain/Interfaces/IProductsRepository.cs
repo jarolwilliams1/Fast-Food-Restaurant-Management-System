@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FastFoodManagerPlataformDomain.Entites;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,6 @@ namespace FastFoodManagerPlataformDomain.Interfaces
 {
     public interface IProductsRepository
     {
-        void CargarProductos();
+        void AgregarProductos(Producto p);
     }
 }

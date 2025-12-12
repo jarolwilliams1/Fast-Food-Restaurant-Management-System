@@ -8,6 +8,7 @@ namespace Menu
         public Menus()
         {
             InitializeComponent();
+            AutoScroll = true;
         }
 
         //private void InitializeComponent()
@@ -39,6 +40,11 @@ namespace Menu
         {
             var GestionPedidos = new Pedidos();
             GestionPedidos.Show();
+        }
+
+        private void Menus_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

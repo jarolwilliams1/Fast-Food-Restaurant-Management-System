@@ -1,12 +1,14 @@
 using Admin.UsersControl;
 using Microsoft.EntityFrameworkCore;
 //using FastFoodManagerDBContext.context;
+//using FastFoodPlataformPersistencia.Context;
+
 
 namespace Admin
 {
     public partial class Form1 : Form
     {
-       // private readonly FastFoodManagerDBContext _dbContext;
+      // private readonly FastFoodManagerDBContext _dbContext;
         public Form1()
         {
             InitializeComponent();
@@ -14,47 +16,13 @@ namespace Admin
             flowCarrito.AutoScroll = true;
             flowProductos.WrapContents = true; // para que se acomoden
         }
-        //private void Form1_Load(object sender, EventArgs e)
+       private void Form1_Load(object sender, EventArgs e) {}
 
 
-      //  { 
-             public void CargarProductos()
-
-       
-        {
-
-            var productos = _dbContext.Productos.ToList();
-
-            foreach (var p in productos)
-            {
-                var card = new ProductoCard(p.Nombre, p.Precio);
-                card.OnAgregar += AgregarAlCarrito;
-                flowProductos.Controls.Add(card);
-            }
-        }
-        private void AgregarAlCarrito(string nombre, decimal precio)
-        {
-            // Ver si ya existe
-            foreach (CarritoItem item in flowCarrito.Controls)
-            {
-                if (item.Nombre == nombre)
-                {
-                    item.Cantidad++;
-                    return;
-                }
-            }
-
-            // Crear item nuevo
-            var nuevo = new CarritoItem(nombre, precio);
-            nuevo.OnEliminar += EliminarItemCarrito;
-            flowCarrito.Controls.Add(nuevo);
-        }
-        private void EliminarItemCarrito(CarritoItem item)
-        {
-            flowCarrito.Controls.Remove(item);
-        }
+      
+ 
     
-       // }
+       
         
        
 

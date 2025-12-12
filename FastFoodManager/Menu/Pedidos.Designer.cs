@@ -51,7 +51,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Arial Rounded MT Bold", 13.875F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.Location = new Point(12, 52);
+            label1.Location = new Point(100, 52);
             label1.Name = "label1";
             label1.Size = new Size(365, 43);
             label1.TabIndex = 0;
@@ -63,7 +63,7 @@
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 10.875F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label3.ForeColor = Color.DimGray;
-            label3.Location = new Point(12, 104);
+            label3.Location = new Point(107, 104);
             label3.Name = "label3";
             label3.Size = new Size(486, 40);
             label3.TabIndex = 2;
@@ -74,7 +74,7 @@
             button1.BackColor = Color.Red;
             button1.Font = new Font("Lucida Sans Unicode", 10.875F, FontStyle.Bold, GraphicsUnit.Point, 0);
             button1.ForeColor = Color.White;
-            button1.Location = new Point(1478, 63);
+            button1.Location = new Point(2124, 45);
             button1.Name = "button1";
             button1.Size = new Size(295, 60);
             button1.TabIndex = 3;
@@ -96,9 +96,9 @@
             groupBox1.Controls.Add(label5);
             groupBox1.Controls.Add(label4);
             groupBox1.Controls.Add(label2);
-            groupBox1.Location = new Point(33, 206);
+            groupBox1.Location = new Point(100, 237);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(1740, 569);
+            groupBox1.Size = new Size(2319, 667);
             groupBox1.TabIndex = 4;
             groupBox1.TabStop = false;
             groupBox1.Visible = false;
@@ -206,7 +206,7 @@
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1846, 996);
+            ClientSize = new Size(2564, 1399);
             Controls.Add(groupBox1);
             Controls.Add(button1);
             Controls.Add(label1);
