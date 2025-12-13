@@ -15,14 +15,14 @@ namespace FastFoodPlataformPersistencia.Repositories
     {
         private readonly FastFoodManagerDBContext _context;
 
-        public ProductRepository(FastFoodManagerDBContext context) 
+        public ProductRepository(FastFoodManagerDBContext context)
         {
-         _context = context;
+            _context = context;
         }
 
         public async void AgregarProducto(Producto p)
         {
-           
+
 
             _context.Productos.Add(p);
             await _context.SaveChangesAsync();
@@ -31,10 +31,10 @@ namespace FastFoodPlataformPersistencia.Repositories
         public async void EliminarProducto(Producto p)
         {
 
-           // object value = await _context.Productos.ExecuteDeleteAsync(p);
+            // object value = await _context.Productos.ExecuteDeleteAsync(p);
             await _context.SaveChangesAsync();
         }
-        
+
 
         //public async void ModificarProducto()
         //{
@@ -43,7 +43,15 @@ namespace FastFoodPlataformPersistencia.Repositories
         //}
 
 
+        public List<Producto> ObtenerProductos()
+        {
+            using (var context = new FastFoodManagerDBContext())
+            {
+                return context.Productos.ToList();
+            }
 
 
+
+        }
     }
 }
