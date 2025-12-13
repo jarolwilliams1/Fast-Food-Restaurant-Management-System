@@ -36,8 +36,10 @@
             groupBox3 = new GroupBox();
             groupBox4 = new GroupBox();
             groupBox5 = new GroupBox();
+            label4 = new Label();
             groupBox1.SuspendLayout();
             Gpedidos.SuspendLayout();
+            groupBox4.SuspendLayout();
             SuspendLayout();
             // 
             // groupBox1
@@ -110,6 +112,7 @@
             // groupBox4
             // 
             groupBox4.BackColor = Color.FromArgb(255, 128, 0);
+            groupBox4.Controls.Add(label4);
             groupBox4.Location = new Point(188, 842);
             groupBox4.Name = "groupBox4";
             groupBox4.Size = new Size(942, 446);
@@ -124,6 +127,16 @@
             groupBox5.Size = new Size(942, 446);
             groupBox5.TabIndex = 3;
             groupBox5.TabStop = false;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(452, 384);
+            label4.Name = "label4";
+            label4.Size = new Size(165, 32);
+            label4.TabIndex = 4;
+            label4.Text = "Gestión Menu";
+            label4.Click += label4_Click;
             // 
             // Menus
             // 
@@ -142,6 +155,8 @@
             groupBox1.PerformLayout();
             Gpedidos.ResumeLayout(false);
             Gpedidos.PerformLayout();
+            groupBox4.ResumeLayout(false);
+            groupBox4.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -155,5 +170,6 @@
         private Label label2;
         private Label label1;
         private Label label3;
+        private Label label4;
     }
 }

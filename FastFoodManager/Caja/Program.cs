@@ -1,7 +1,4 @@
-using FastFoodPlataformPersistencia.Context;
-using FastFoodPlataformPersistencia.Repositories;
-
-namespace Menu
+namespace Caja
 {
     internal static class Program
     {
@@ -11,13 +8,10 @@ namespace Menu
         [STAThread]
         static void Main()
         {
-            var context = new FastFoodManagerDBContext();
-            var repo = new ProductRepository(context);
-            
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new Menus(repo));
+            Application.Run(new Form1());
         }
     }
 }

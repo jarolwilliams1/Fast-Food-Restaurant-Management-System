@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\FastFoodManagerApp\FastFoodManagerApp.csproj" />
     <ProjectReference Include="..\FastFoodManagerPlataformDomain\FastFoodManagerPlataformDomain.csproj" />
   </ItemGroup>
 

@@ -9,6 +9,7 @@ namespace FastFoodManagerPlataformDomain.Interfaces
 {
     public interface IProductsRepository
     {
-        void AgregarProductos(Producto p);
+        void AgregarProducto(Producto p);
+        void EliminarProducto(Producto p);
     }
 }

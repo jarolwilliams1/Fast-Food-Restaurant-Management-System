@@ -22,11 +22,28 @@ namespace FastFoodPlataformPersistencia.Repositories
 
         public async void AgregarProducto(Producto p)
         {
+           
+
             _context.Productos.Add(p);
             await _context.SaveChangesAsync();
         }
 
-       
+        public async void EliminarProducto(Producto p)
+        {
+
+           // object value = await _context.Productos.ExecuteDeleteAsync(p);
+            await _context.SaveChangesAsync();
+        }
+        
+
+        //public async void ModificarProducto()
+        //{
+
+
+        //}
+
+
+
 
     }
 }

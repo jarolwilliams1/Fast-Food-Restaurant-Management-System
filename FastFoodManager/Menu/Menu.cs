@@ -1,15 +1,25 @@
 
 //using Menu;
 
+using FastFoodPlataformPersistencia.Context;
+using FastFoodPlataformPersistencia.Repositories;
+
 namespace Menu
 {
     public partial class Menus : Form
     {
-        public Menus()
+        private readonly ProductRepository _productRepository = null!;
+        public Menus(ProductRepository repo)
         {
             InitializeComponent();
             AutoScroll = true;
+            _productRepository = repo;
         }
+
+        
+
+
+
 
         //private void InitializeComponent()
         //{
@@ -45,6 +55,12 @@ namespace Menu
         private void Menus_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+          var GestionProductos = new Productos(_productRepository);
+            GestionProductos.Show();
         }
     }
 }

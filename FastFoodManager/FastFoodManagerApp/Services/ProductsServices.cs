@@ -1,4 +1,4 @@
-﻿using Admin.UsersControl;
+﻿using FastFoodManagerApp.Interfaces;
 using FastFoodManagerPlataformDomain.Entites;
 using FastFoodPlataformPersistencia.Context;
 using FastFoodPlataformPersistencia.Repositories;
@@ -6,55 +6,55 @@ using FastFoodPlataformPersistencia.Repositories;
 
 namespace FastFoodManagerApp.Services
 {
-    public class ProductsServices
+    public class ProductsServices //: IProductsServices
     {
         private readonly ProductRepository _productsRepository;
-        private readonly FastFoodManagerDBContext _dbContext;
-        public ProductsServices(ProductRepository productsRepository, FastFoodManagerDBContext dbContext )
+      // private readonly FastFoodManagerDBContext _dbContext;
+        public ProductsServices(ProductRepository productsRepository )
         {
             _productsRepository = productsRepository;
-            _dbContext = dbContext;
+           // _dbContext = dbContext;
         }
 
-        public List<Producto> ObtenerProductos()
-        {
-            return _dbContext.Productos.ToList();
-        }
+       // public List<Producto> ObtenerProductos()
+       // {
+           // return _dbContext.Productos.ToList();
+       // }
 
         public void CargarProductos()
 
 
         {
 
-            var productos = _dbContext.Productos.ToList();
+            //var productos = _dbContext.Productos.ToList();
 
-            foreach (var p in productos)
+           // foreach (var p in productos)
             {
-                var card = new ProductoCard(p.Nombre, p.Precio);
-                card.OnAgregar += AgregarAlCarrito;
-                flowProductos.Controls.Add(card);
+                //var card = new ProductoCard(p.Nombre, p.Precio);
+                //card.OnAgregar += AgregarAlCarrito;
+                //flowProductos.Controls.Add(card);
             }
         }
         private void AgregarAlCarrito(string nombre, decimal precio)
         {
             // Ver si ya existe
-            foreach (CarritoItem item in flowCarrito.Controls)
-            {
-                if (item.Nombre == nombre)
-                {
-                    item.Cantidad++;
-                    return;
-                }
-            }
+            //foreach (CarritoItem item in flowCarrito.Controls)
+            //{
+            //    if (item.Nombre == nombre)
+            //    {
+            //        item.Cantidad++;
+            //        return;
+            //    }
+            //}
 
             // Crear item nuevo
-            var nuevo = new CarritoItem(nombre, precio);
-            nuevo.OnEliminar += EliminarItemCarrito;
-            flowCarrito.Controls.Add(nuevo);
+            //var nuevo = new CarritoItem(nombre, precio);
+            //nuevo.OnEliminar += EliminarItemCarrito;
+            //flowCarrito.Controls.Add(nuevo);
         }
         private void EliminarItemCarrito(CarritoItem item)
         {
-            flowCarrito.Controls.Remove(item);
+           // flowCarrito.Controls.Remove(item);
         }
 
 

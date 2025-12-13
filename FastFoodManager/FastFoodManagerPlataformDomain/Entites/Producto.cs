@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 
 namespace FastFoodManagerPlataformDomain.Entites {
-    public partial class Producto
+    public class Producto
     {
         public int Id { get; set; }
 

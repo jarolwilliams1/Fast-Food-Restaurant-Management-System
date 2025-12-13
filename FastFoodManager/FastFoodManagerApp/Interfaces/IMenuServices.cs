@@ -8,8 +8,8 @@ using FastFoodManagerPlataformDomain.Entites;
 
 namespace FastFoodManagerApp.Interfaces
 {
-    internal interface IMenuServices
+    public interface IMenuServices
     {
-        void AgregarProducto(Producto p);
+        void AgregrarProducto(string nombre, string catgoria, decimal precio, bool estado, string descripcion);
     }
 }
