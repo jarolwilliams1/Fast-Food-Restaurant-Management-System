@@ -1,9 +1,10 @@
-﻿using System;
+﻿using FastFoodManagerApp.Services;
+using FastFoodManagerPlataformDomain.Entites;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using FastFoodManagerApp.Services;
 
 namespace Menu
 {
@@ -297,7 +298,25 @@ namespace Menu
                 };
 
                 // Guardar en la base de datos
-                string codigoPedido = await _pedidoService.CrearNuevoPedidoAsync(nuevoPedido);
+               // string codigoPedido = await _pedidoService.CrearNuevoPedidoAsync(nuevoPedido);
+
+                string codigoPedido = nuevoPedido.NumeroOrden.StartsWith("#")
+    ? nuevoPedido.NumeroOrden
+    : $"#{nuevoPedido.NumeroOrden}";
+
+                var pedido = new Pedido
+                {
+                    Fecha = DateTime.Now,
+                    ClienteId = nuevoPedido.ClienteId,
+                    EmpleadoId = nuevoPedido.EmpleadoId,
+                    Total = nuevoPedido.Total,
+                    Estado = "Pendiente",
+                };
+                var p = new PedidoItem() {
+                    CodigoPedido = codigoPedido   // ← CLAVE
+                };
+
+
 
                 MessageBox.Show($"¡Pedido {codigoPedido} creado exitosamente!",
                     "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -337,7 +356,7 @@ namespace Menu
 
         private async System.Threading.Tasks.Task CargarPedidosAsync()
         {
-            // LÓGICA DE NEGOCIO (SIN MODIFICAR)
+            // LÓGICA DE NEGOCIO
             try
             {
                 panelOrders.Controls.Clear();
@@ -363,7 +382,7 @@ namespace Menu
 
         private void RenderOrders(List<PedidoDTO> pedidos)
         {
-            // LÓGICA DE NEGOCIO (SIN MODIFICAR)
+            // LÓGICA DE NEGOCIO 
             panelOrders.Controls.Clear();
 
             if (pedidos == null || pedidos.Count == 0)
@@ -623,7 +642,7 @@ namespace Menu
 
         private void Pedidos_Load_1(object sender, EventArgs e)
         {
-            Size = MaximumSize;
+           
         }
     }
 }

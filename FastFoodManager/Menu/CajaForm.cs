@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using FastFoodManagerPlataformDomain.Entites;
-using FastFoodManagerApp.Services; // ✅ IMPORTANTE: Para acceder a ICajaService, CarritoItemDTO, VentaDTO
+using FastFoodManagerApp.Services;
 
 namespace Menu
 {
@@ -43,16 +43,7 @@ namespace Menu
             // El método async CargarPromociones() ya se llama en el constructor
         }
 
-        // Si prefieres cargar en el Load en lugar del constructor:
-        
-
-        //private void InitializeComponent()
-        //{
-        //    this.Text = "Punto de Venta";
-        //    this.WindowState = FormWindowState.Maximized;
-        //    this.BackColor = Color.White;
-        //    this.FormBorderStyle = FormBorderStyle.None;
-        //}
+       
 
         private void InitializeUI()
         {
@@ -102,7 +93,7 @@ namespace Menu
             // Panel izquierdo - Productos
             Panel leftPanel = new Panel
             {
-                Location = new Point(0, 0),
+                Location = new Point(0, 120),
                 Size = new Size(mainPanel.Width / 2, mainPanel.Height),
                 BackColor = Color.White,
                 Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left
@@ -112,10 +103,14 @@ namespace Menu
             Label lblProductos = new Label
             {
                 Text = "PRODUCTOS",
-                Location = new Point(20, 10),
+                Location = new Point(20, 0),
                 Size = new Size(200, 30),
-                Font = new Font("Segoe UI", 14, FontStyle.Bold)
+                Font = new Font("Segoe UI", 14, FontStyle.Bold),
+
             };
+            // para poner al frente
+            lblProductos.BringToFront();
+
             leftPanel.Controls.Add(lblProductos);
 
             flowProductos = new FlowLayoutPanel
@@ -144,6 +139,8 @@ namespace Menu
                 Size = new Size(200, 30),
                 Font = new Font("Segoe UI", 14, FontStyle.Bold)
             };
+            // para poner al frente
+            lblCarrito.BringToFront();
             rightPanel.Controls.Add(lblCarrito);
 
             flowCarrito = new FlowLayoutPanel
@@ -285,7 +282,7 @@ namespace Menu
         {
             Panel card = new Panel
             {
-                Size = new Size(220, 100),
+                Size = new Size(260, 130),
                 BackColor = Color.White,
                 BorderStyle = BorderStyle.FixedSingle,
                 Cursor = Cursors.Hand
@@ -510,9 +507,6 @@ namespace Menu
             }
         }
 
-        //protected override void Dispose(bool disposing)
-        //{
-        //    base.Dispose(disposing);
-        //}
+       
     }
 }
