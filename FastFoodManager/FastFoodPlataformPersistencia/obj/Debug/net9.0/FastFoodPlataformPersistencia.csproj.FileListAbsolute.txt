@@ -16,11 +16,3 @@ C:\Dev\Fast Food Restaurant Management System\FastFoodManager\FastFoodPlataformP
 C:\Dev\Fast Food Restaurant Management System\FastFoodManager\FastFoodPlataformPersistencia\bin\Debug\net9.0\FastFoodManagerPlataformDomain.pdb
 C:\Dev\Fast Food Restaurant Management System\FastFoodManager\FastFoodPlataformPersistencia\obj\Debug\net9.0\FastFood.30720701.Up2Date
 C:\Dev\Fast Food Restaurant Management System\FastFoodManager\FastFoodPlataformPersistencia\obj\Debug\net9.0\FastFoodPlataformPersistencia.sourcelink.json
-C:\Dev\Fast Food Restaurant Management System\FastFoodManager\FastFoodPlataformPersistencia\bin\Debug\net9.0\FastFoodManagerWebApplication.deps.json
-C:\Dev\Fast Food Restaurant Management System\FastFoodManager\FastFoodPlataformPersistencia\bin\Debug\net9.0\FastFoodManagerWebApplication.runtimeconfig.json
-C:\Dev\Fast Food Restaurant Management System\FastFoodManager\FastFoodPlataformPersistencia\bin\Debug\net9.0\appsettings.Development.json
-C:\Dev\Fast Food Restaurant Management System\FastFoodManager\FastFoodPlataformPersistencia\bin\Debug\net9.0\appsettings.json
-C:\Dev\Fast Food Restaurant Management System\FastFoodManager\FastFoodPlataformPersistencia\bin\Debug\net9.0\FastFoodManagerWebApplication.staticwebassets.endpoints.json
-C:\Dev\Fast Food Restaurant Management System\FastFoodManager\FastFoodPlataformPersistencia\bin\Debug\net9.0\FastFoodManagerWebApplication.exe
-C:\Dev\Fast Food Restaurant Management System\FastFoodManager\FastFoodPlataformPersistencia\bin\Debug\net9.0\FastFoodManagerWebApplication.dll
-C:\Dev\Fast Food Restaurant Management System\FastFoodManager\FastFoodPlataformPersistencia\bin\Debug\net9.0\FastFoodManagerWebApplication.pdb

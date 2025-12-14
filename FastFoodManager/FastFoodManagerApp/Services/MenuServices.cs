@@ -44,7 +44,7 @@ namespace FastFoodManagerApp.Services
         public void AgregrarProducto(string nombre, string catgoria,decimal precio, bool estado, string descripcion)
         {
             var product =  new Producto  { Nombre = nombre, Categoria = catgoria, Precio = precio, Descripcion = descripcion, Disponible = estado };
-             _repo.AgregarProducto(product);
+             _repo.AgregarProductoAsync(product);
 
 
         }

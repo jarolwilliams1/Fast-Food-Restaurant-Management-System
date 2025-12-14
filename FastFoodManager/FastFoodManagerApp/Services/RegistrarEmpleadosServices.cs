@@ -105,38 +105,7 @@ namespace FastFoodManagerApp.Services
 
 
             return Confirmar;
-            // bool confirmar = true;
-            // _repo.Entrar(usuario, contrasena);
-
-
-
-            // if (string.IsNullOrEmpty(usuario) || string.IsNullOrEmpty(contrasena) || usuario != e.Usuario || contrasena != e.Passwordd)
-            // {
-            //     confirmar = false;
-            //     return confirmar;
-            // }
-
-            // else if (usuario == e.Usuario && contrasena == e.Passwordd)
-
-            // {
-
-            //     confirmar = true;
-            // }
-
-            //return confirmar;
-
-
-            //if (string.IsNullOrEmpty(usuario) || string.IsNullOrEmpty(contrasena))
-            //    return false;
-
-            //// Llamada al repositorio (si valida en DB)
-            //_repo.Entrar(usuario, contrasena);
-
-            //// Si el repositorio validó correctamente:
-            //if (usuario == e.Usuario && contrasena == e.Passwordd)
-            //    return true;
-
-            //return false;
+            
         }
 
     }

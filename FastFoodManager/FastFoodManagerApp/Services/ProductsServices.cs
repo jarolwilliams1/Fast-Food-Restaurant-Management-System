@@ -3,23 +3,11 @@ using FastFoodManagerPlataformDomain.Interfaces;
 using FastFoodPlataformPersistencia.Repositories;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace FastFoodManagerApp.Services
 {
-    public interface IProductoService
-    {
-        Task<List<Producto>> ObtenerTodosProductosAsync();
-        Task<List<Producto>> ObtenerProductosDisponiblesAsync();
-        Task<List<Producto>> ObtenerProductosPorCategoriaAsync(string categoria);
-        Task<Producto> ObtenerProductoPorIdAsync(int id);
-        Task<bool> AgregarProductoAsync(string nombre, string categoria, decimal precio, string descripcion, bool disponible);
-        Task<bool> ActualizarProductoAsync(int id, string nombre, string categoria, decimal precio, string descripcion, bool disponible);
-        Task<bool> EliminarProductoAsync(int id);
-        Task<bool> CambiarDisponibilidadAsync(int id, bool disponible);
-        Task<List<string>> ObtenerCategoriasAsync();
-    }
-
     public class ProductoService : IProductoService
     {
         private readonly IProductsRepository _productRepository;
@@ -92,7 +80,6 @@ namespace FastFoodManagerApp.Services
         {
             try
             {
-                // Validaciones
                 if (string.IsNullOrWhiteSpace(nombre))
                     throw new ArgumentException("El nombre no puede estar vacío");
 
@@ -121,7 +108,6 @@ namespace FastFoodManagerApp.Services
         {
             try
             {
-                // Validaciones
                 if (id <= 0)
                     throw new ArgumentException("El ID debe ser mayor a cero");
 

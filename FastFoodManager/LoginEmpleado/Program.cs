@@ -23,37 +23,7 @@ namespace LoginEmpleado
 
 
 
-    //        // Registrar DbContext
-    //        services.AddDbContext<FastFoodManagerDBContext>();
-
-    //        // Registrar repositorios
-    //        services.AddScoped<IEmployeeRepository, EmployeeRepository>();
-
-    //        // Registrar servicios de aplicación
-    //        services.AddScoped<IRegistrarServices, RegistrarEmpleados>();
-
-    //        // Registrar formulario
-    //        services.AddScoped<ResgistarNuevos>();
-
-    //        var provider = services.BuildServiceProvider();
-
-    //        Application.EnableVisualStyles();
-    //        Application.SetCompatibleTextRenderingDefault(false);
-
-    //        Application.Run(provider.GetRequiredService<ResgistarNuevos>());
-
-    //         var host = Host.CreateDefaultBuilder()
-    //    .ConfigureServices((ctx, services) =>
-    //    {
-    //        services.AddDbContext<FastFoodManagerDBContext>(opts => 
-    //            opts.UseSqlServer("Server=.;Database=FastFood;Trusted_Connection=True;"));
-    //        services.AddScoped<IEmployeeRepository, EmployeeRepository>();
-    //        services.AddScoped<RegistrarEmpleados>();
-    //        services.AddScoped<ResgistarNuevos>();
-    //    })
-    //    .Build();
-    //ApplicationConfiguration.Initialize();
-    //Application.Run(host.Services.GetRequiredService<ResgistarNuevos>());
+  
         }
     }
     }

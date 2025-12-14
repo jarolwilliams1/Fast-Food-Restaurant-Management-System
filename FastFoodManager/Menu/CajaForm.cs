@@ -2,487 +2,517 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using FastFoodManagerPlataformDomain.Entites;
-using FastFoodManagerApp.Services;
+using FastFoodManagerApp.Services; // ✅ IMPORTANTE: Para acceder a ICajaService, CarritoItemDTO, VentaDTO
 
 namespace Menu
 {
     public partial class CajaForm : Form
     {
         private readonly ICajaService _cajaService;
-        private List<CarritoItemDTO> cart;
-        private int empleadoId;
-        private int clienteId;
+        private readonly int _empleadoId;
+        private readonly int _clienteId;
 
-        // Controles de la interfaz
-        private Panel panelHeader;
-        private Panel panelProductos;
+        private FlowLayoutPanel flowProductos;
         private FlowLayoutPanel flowCarrito;
         private Label lblTotal;
         private TextBox txtPago;
         private Label lblCambio;
         private Button btnCompletarVenta;
-        private Label lblCarritoVacio;
+        private Button btnCerrar;
+
+        private List<CarritoItemDTO> carrito = new List<CarritoItemDTO>();
 
         public CajaForm(ICajaService cajaService, int empleadoId, int clienteId = 1)
         {
-            InitializeComponent();
             _cajaService = cajaService;
-            this.empleadoId = empleadoId;
-            this.clienteId = clienteId;
-            cart = new List<CarritoItemDTO>();
+            _empleadoId = empleadoId;
+            _clienteId = clienteId;
+
+            InitializeComponent();
+            InitializeUI();
+            _ = CargarProductos();
         }
 
-        private async void CajaForm_Load(object sender, EventArgs e)
+       
+        private void CajaForm_Load(object sender, EventArgs e)
         {
-            InitializeUI();
-            await LoadProductsFromService();
-            UpdateCart();
+            // Este método se ejecuta cuando el formulario se carga
+            // El método async CargarPromociones() ya se llama en el constructor
         }
+
+        // Si prefieres cargar en el Load en lugar del constructor:
+        
 
         //private void InitializeComponent()
         //{
-        //    this.Text = "Caja";
+        //    this.Text = "Punto de Venta";
         //    this.WindowState = FormWindowState.Maximized;
-        //    this.BackColor = Color.FromArgb(245, 245, 245);
+        //    this.BackColor = Color.White;
         //    this.FormBorderStyle = FormBorderStyle.None;
         //}
 
         private void InitializeUI()
         {
-            // Header rojo
-            panelHeader = new Panel
+            // Panel Header Rojo
+            Panel headerPanel = new Panel
             {
                 Dock = DockStyle.Top,
-                Height = 80,
-                BackColor = Color.FromArgb(220, 20, 60)
+                Height = 60,
+                BackColor = Color.FromArgb(220, 38, 38)
             };
-            this.Controls.Add(panelHeader);
+            this.Controls.Add(headerPanel);
 
             Label lblTitulo = new Label
             {
-                Text = "Caja",
-                Location = new Point(30, 25),
-                Size = new Size(200, 35),
-                Font = new Font("Segoe UI", 20, FontStyle.Bold),
+                Text = "PUNTO DE VENTA",
+                Location = new Point(20, 15),
+                Size = new Size(300, 30),
+                Font = new Font("Segoe UI", 16, FontStyle.Bold),
                 ForeColor = Color.White
             };
-            panelHeader.Controls.Add(lblTitulo);
+            headerPanel.Controls.Add(lblTitulo);
 
-            Button btnCerrar = new Button
+            btnCerrar = new Button
             {
                 Text = "✕",
-                Location = new Point(this.Width - 70, 20),
+                Location = new Point(headerPanel.Width - 60, 10),
                 Size = new Size(40, 40),
-                BackColor = Color.FromArgb(220, 20, 60),
+                BackColor = Color.Transparent,
                 ForeColor = Color.White,
                 FlatStyle = FlatStyle.Flat,
-                Font = new Font("Segoe UI", 18, FontStyle.Bold),
-                Cursor = Cursors.Hand
+                Font = new Font("Segoe UI", 16, FontStyle.Bold),
+                Anchor = AnchorStyles.Top | AnchorStyles.Right
             };
             btnCerrar.FlatAppearance.BorderSize = 0;
             btnCerrar.Click += (s, e) => this.Close();
-            panelHeader.Controls.Add(btnCerrar);
+            headerPanel.Controls.Add(btnCerrar);
+
+            // Panel principal dividido
+            Panel mainPanel = new Panel
+            {
+                Location = new Point(0, 60),
+                Size = new Size(this.ClientSize.Width, this.ClientSize.Height - 60),
+                Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right
+            };
+            this.Controls.Add(mainPanel);
 
             // Panel izquierdo - Productos
-            Panel panelIzquierdo = new Panel
+            Panel leftPanel = new Panel
             {
-                Location = new Point(0, 80),
-                Size = new Size(this.Width / 2, this.Height - 80),
+                Location = new Point(0, 0),
+                Size = new Size(mainPanel.Width / 2, mainPanel.Height),
                 BackColor = Color.White,
-                Padding = new Padding(20)
+                Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left
             };
-            this.Controls.Add(panelIzquierdo);
+            mainPanel.Controls.Add(leftPanel);
 
             Label lblProductos = new Label
             {
-                Text = "Productos",
-                Location = new Point(30, 20),
+                Text = "PRODUCTOS",
+                Location = new Point(20, 10),
                 Size = new Size(200, 30),
-                Font = new Font("Segoe UI", 16, FontStyle.Bold),
-                ForeColor = Color.Black
+                Font = new Font("Segoe UI", 14, FontStyle.Bold)
             };
-            panelIzquierdo.Controls.Add(lblProductos);
+            leftPanel.Controls.Add(lblProductos);
 
-            panelProductos = new Panel
+            flowProductos = new FlowLayoutPanel
             {
-                Location = new Point(20, 60),
-                Size = new Size(panelIzquierdo.Width - 40, panelIzquierdo.Height - 80),
+                Location = new Point(20, 50),
+                Size = new Size(leftPanel.Width - 40, leftPanel.Height - 60),
                 AutoScroll = true,
-                BackColor = Color.White
+                Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right
             };
-            panelIzquierdo.Controls.Add(panelProductos);
+            leftPanel.Controls.Add(flowProductos);
 
             // Panel derecho - Carrito
-            Panel panelDerecho = new Panel
+            Panel rightPanel = new Panel
             {
-                Location = new Point(this.Width / 2, 80),
-                Size = new Size(this.Width / 2, this.Height - 80),
-                BackColor = Color.FromArgb(250, 250, 250),
-                Padding = new Padding(20)
+                Location = new Point(mainPanel.Width / 2, 0),
+                Size = new Size(mainPanel.Width / 2, mainPanel.Height),
+                BackColor = Color.FromArgb(243, 244, 246),
+                Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right
             };
-            this.Controls.Add(panelDerecho);
+            mainPanel.Controls.Add(rightPanel);
 
-            Label lblCarritoTitulo = new Label
+            Label lblCarrito = new Label
             {
-                Text = "Carrito",
-                Location = new Point(30, 20),
+                Text = "CARRITO",
+                Location = new Point(20, 10),
                 Size = new Size(200, 30),
-                Font = new Font("Segoe UI", 16, FontStyle.Bold),
-                ForeColor = Color.Black
+                Font = new Font("Segoe UI", 14, FontStyle.Bold)
             };
-            panelDerecho.Controls.Add(lblCarritoTitulo);
+            rightPanel.Controls.Add(lblCarrito);
 
-            // Área de carrito con scroll
-            Panel areaCarrito = new Panel
-            {
-                Location = new Point(20, 60),
-                Size = new Size(panelDerecho.Width - 40, 300),
-                BackColor = Color.White,
-                BorderStyle = BorderStyle.FixedSingle,
-                AutoScroll = true
-            };
-            panelDerecho.Controls.Add(areaCarrito);
-
-            // FlowLayoutPanel para items del carrito
             flowCarrito = new FlowLayoutPanel
             {
-                Dock = DockStyle.Fill,
-                FlowDirection = FlowDirection.TopDown,
-                WrapContents = false,
+                Location = new Point(20, 50),
+                Size = new Size(rightPanel.Width - 40, rightPanel.Height - 300),
                 AutoScroll = true,
-                Padding = new Padding(10)
-            };
-            areaCarrito.Controls.Add(flowCarrito);
-
-            // Label "Carrito vacío"
-            lblCarritoVacio = new Label
-            {
-                Text = "Carrito vacío",
-                Dock = DockStyle.Fill,
-                TextAlign = ContentAlignment.MiddleCenter,
-                Font = new Font("Segoe UI", 12, FontStyle.Italic),
-                ForeColor = Color.Gray
-            };
-            flowCarrito.Controls.Add(lblCarritoVacio);
-
-            // Panel Total
-            Panel panelTotal = new Panel
-            {
-                Location = new Point(20, 370),
-                Size = new Size(panelDerecho.Width - 40, 100),
                 BackColor = Color.White,
-                BorderStyle = BorderStyle.FixedSingle
+                Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right
             };
-            panelDerecho.Controls.Add(panelTotal);
+            rightPanel.Controls.Add(flowCarrito);
 
-            Label lblTotalLabel = new Label
+            // Panel de totales
+            Panel totalPanel = new Panel
             {
-                Text = "Total a Pagar",
-                Location = new Point(20, 15),
-                Size = new Size(150, 25),
+                Location = new Point(20, rightPanel.Height - 240),
+                Size = new Size(rightPanel.Width - 40, 230),
+                BackColor = Color.White,
+                Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right
+            };
+            rightPanel.Controls.Add(totalPanel);
+
+            Label lblTotalText = new Label
+            {
+                Text = "TOTAL:",
+                Location = new Point(20, 20),
+                Size = new Size(100, 30),
                 Font = new Font("Segoe UI", 12, FontStyle.Bold)
             };
-            panelTotal.Controls.Add(lblTotalLabel);
+            totalPanel.Controls.Add(lblTotalText);
 
             lblTotal = new Label
             {
                 Text = "$0.00",
-                Location = new Point(20, 45),
-                Size = new Size(300, 35),
-                Font = new Font("Segoe UI", 24, FontStyle.Bold),
-                ForeColor = Color.FromArgb(0, 150, 0)
+                Location = new Point(totalPanel.Width - 120, 20),
+                Size = new Size(100, 30),
+                Font = new Font("Segoe UI", 14, FontStyle.Bold),
+                ForeColor = Color.FromArgb(220, 38, 38),
+                TextAlign = ContentAlignment.MiddleRight,
+                Anchor = AnchorStyles.Top | AnchorStyles.Right
             };
-            panelTotal.Controls.Add(lblTotal);
+            totalPanel.Controls.Add(lblTotal);
 
-            // Panel Pago
-            Panel panelPago = new Panel
+            Label lblPagoText = new Label
             {
-                Location = new Point(20, 480),
-                Size = new Size(panelDerecho.Width - 40, 200),
-                BackColor = Color.White,
-                BorderStyle = BorderStyle.FixedSingle
-            };
-            panelDerecho.Controls.Add(panelPago);
-
-            Label lblPagoTitulo = new Label
-            {
-                Text = "Pago",
-                Location = new Point(20, 15),
-                Size = new Size(150, 25),
-                Font = new Font("Segoe UI", 12, FontStyle.Bold)
-            };
-            panelPago.Controls.Add(lblPagoTitulo);
-
-            Label lblMontoRecibido = new Label
-            {
-                Text = "Monto Recibido:",
-                Location = new Point(20, 50),
-                Size = new Size(150, 20),
+                Text = "PAGO:",
+                Location = new Point(20, 70),
+                Size = new Size(100, 25),
                 Font = new Font("Segoe UI", 10)
             };
-            panelPago.Controls.Add(lblMontoRecibido);
+            totalPanel.Controls.Add(lblPagoText);
 
             txtPago = new TextBox
             {
-                Location = new Point(20, 75),
-                Size = new Size(panelPago.Width - 40, 30),
+                Location = new Point(20, 100),
+                Size = new Size(totalPanel.Width - 40, 30),
                 Font = new Font("Segoe UI", 12),
-                Text = "0.00"
+                Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right
             };
             txtPago.TextChanged += TxtPago_TextChanged;
-            panelPago.Controls.Add(txtPago);
+            totalPanel.Controls.Add(txtPago);
+
+            Label lblCambioText = new Label
+            {
+                Text = "CAMBIO:",
+                Location = new Point(20, 140),
+                Size = new Size(100, 25),
+                Font = new Font("Segoe UI", 10)
+            };
+            totalPanel.Controls.Add(lblCambioText);
 
             lblCambio = new Label
             {
-                Text = "Cambio: $0.00",
-                Location = new Point(20, 110),
-                Size = new Size(panelPago.Width - 40, 25),
-                Font = new Font("Segoe UI", 10),
-                ForeColor = Color.Gray
+                Text = "$0.00",
+                Location = new Point(totalPanel.Width - 120, 140),
+                Size = new Size(100, 25),
+                Font = new Font("Segoe UI", 12, FontStyle.Bold),
+                ForeColor = Color.Green,
+                TextAlign = ContentAlignment.MiddleRight,
+                Anchor = AnchorStyles.Top | AnchorStyles.Right
             };
-            panelPago.Controls.Add(lblCambio);
+            totalPanel.Controls.Add(lblCambio);
 
             btnCompletarVenta = new Button
             {
-                Text = "Completar Venta",
-                Location = new Point(20, 145),
-                Size = new Size(panelPago.Width - 40, 40),
-                BackColor = Color.FromArgb(180, 180, 180),
+                Text = "COMPLETAR VENTA",
+                Location = new Point(20, 180),
+                Size = new Size(totalPanel.Width - 40, 40),
+                BackColor = Color.FromArgb(34, 197, 94),
                 ForeColor = Color.White,
                 Font = new Font("Segoe UI", 12, FontStyle.Bold),
                 FlatStyle = FlatStyle.Flat,
                 Enabled = false,
-                Cursor = Cursors.Hand
+                Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right
             };
             btnCompletarVenta.FlatAppearance.BorderSize = 0;
             btnCompletarVenta.Click += BtnCompletarVenta_Click;
-            panelPago.Controls.Add(btnCompletarVenta);
+            totalPanel.Controls.Add(btnCompletarVenta);
         }
 
-        private async System.Threading.Tasks.Task LoadProductsFromService()
+        private async Task CargarProductos()
         {
             try
             {
                 var productos = await _cajaService.ObtenerProductosDisponiblesAsync();
 
-                int x = 10, y = 10;
+                flowProductos.Controls.Clear();
+
+                int x = 0;
+                int y = 0;
                 int col = 0;
-                int buttonWidth = 320;
-                int buttonHeight = 80;
 
                 foreach (var producto in productos)
                 {
-                    Panel btnProducto = new Panel
-                    {
-                        Location = new Point(x, y),
-                        Size = new Size(buttonWidth, buttonHeight),
-                        BackColor = Color.White,
-                        BorderStyle = BorderStyle.FixedSingle,
-                        Cursor = Cursors.Hand,
-                        Tag = producto
-                    };
-
-                    Label lblNombre = new Label
-                    {
-                        Text = producto.Nombre,
-                        Location = new Point(15, 15),
-                        Size = new Size(buttonWidth - 30, 35),
-                        Font = new Font("Segoe UI", 11, FontStyle.Bold),
-                        ForeColor = Color.Black
-                    };
-                    btnProducto.Controls.Add(lblNombre);
-
-                    Label lblPrecio = new Label
-                    {
-                        Text = "$" + producto.Precio.ToString("0.00"),
-                        Location = new Point(15, 50),
-                        Size = new Size(buttonWidth - 30, 20),
-                        Font = new Font("Segoe UI", 10),
-                        ForeColor = Color.FromArgb(0, 150, 0)
-                    };
-                    btnProducto.Controls.Add(lblPrecio);
-
-                    btnProducto.Click += (s, e) => BtnProducto_Click(producto);
-                    lblNombre.Click += (s, e) => BtnProducto_Click(producto);
-                    lblPrecio.Click += (s, e) => BtnProducto_Click(producto);
-
-                    panelProductos.Controls.Add(btnProducto);
+                    Panel card = CrearTarjetaProducto(producto);
+                    card.Location = new Point(x, y);
+                    flowProductos.Controls.Add(card);
 
                     col++;
                     if (col == 2)
                     {
                         col = 0;
-                        y += buttonHeight + 10;
-                        x = 10;
+                        y += 120;
+                        x = 0;
                     }
                     else
                     {
-                        x += buttonWidth + 10;
+                        x += 240;
                     }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al cargar productos: " + ex.Message, "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error al cargar productos: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        private void BtnProducto_Click(Producto producto)
+        private Panel CrearTarjetaProducto(Producto producto)
         {
-            var existingItem = cart.FirstOrDefault(item => item.ProductoId == producto.Id);
-            if (existingItem != null)
+            Panel card = new Panel
             {
-                existingItem.Cantidad++;
+                Size = new Size(220, 100),
+                BackColor = Color.White,
+                BorderStyle = BorderStyle.FixedSingle,
+                Cursor = Cursors.Hand
+            };
+
+            Label lblNombre = new Label
+            {
+                Text = producto.Nombre,
+                Location = new Point(10, 10),
+                Size = new Size(200, 40),
+                Font = new Font("Segoe UI", 10, FontStyle.Bold)
+            };
+            card.Controls.Add(lblNombre);
+
+            Label lblPrecio = new Label
+            {
+                Text = "$" + producto.Precio.ToString("F2"),
+                Location = new Point(10, 55),
+                Size = new Size(100, 25),
+                Font = new Font("Segoe UI", 11, FontStyle.Bold),
+                ForeColor = Color.FromArgb(220, 38, 38)
+            };
+            card.Controls.Add(lblPrecio);
+
+            Button btnAgregar = new Button
+            {
+                Text = "+",
+                Location = new Point(170, 50),
+                Size = new Size(40, 40),
+                BackColor = Color.FromArgb(220, 38, 38),
+                ForeColor = Color.White,
+                Font = new Font("Segoe UI", 16, FontStyle.Bold),
+                FlatStyle = FlatStyle.Flat
+            };
+            btnAgregar.FlatAppearance.BorderSize = 0;
+            btnAgregar.Click += (s, e) => AgregarAlCarrito(producto);
+            card.Controls.Add(btnAgregar);
+
+            return card;
+        }
+
+        private void AgregarAlCarrito(Producto producto)
+        {
+            var itemExistente = carrito.FirstOrDefault(i => i.ProductoId == producto.Id);
+
+            if (itemExistente != null)
+            {
+                itemExistente.Cantidad++;
             }
             else
             {
-                cart.Add(new CarritoItemDTO
+                carrito.Add(new CarritoItemDTO
                 {
                     ProductoId = producto.Id,
-                    Nombre = producto.Nombre,
-                    Precio = producto.Precio,
+                    NombreProducto = producto.Nombre,
+                    PrecioUnitario = producto.Precio,
                     Cantidad = 1
                 });
             }
 
-            UpdateCart();
+            ActualizarCarrito();
         }
 
-        private void UpdateCart()
+        private void ActualizarCarrito()
         {
             flowCarrito.Controls.Clear();
 
-            if (cart.Count == 0)
+            int y = 0;
+            foreach (var item in carrito)
             {
-                lblCarritoVacio.Visible = true;
-                flowCarrito.Controls.Add(lblCarritoVacio);
+                Panel itemPanel = CrearItemCarrito(item);
+                itemPanel.Location = new Point(0, y);
+                flowCarrito.Controls.Add(itemPanel);
+                y += 70;
+            }
+
+            ActualizarTotales();
+        }
+
+        private Panel CrearItemCarrito(CarritoItemDTO item)
+        {
+            Panel panel = new Panel
+            {
+                Size = new Size(flowCarrito.Width - 25, 60),
+                BackColor = Color.FromArgb(249, 250, 251),
+                BorderStyle = BorderStyle.FixedSingle
+            };
+
+            Label lblNombre = new Label
+            {
+                Text = item.NombreProducto,
+                Location = new Point(10, 10),
+                Size = new Size(200, 20),
+                Font = new Font("Segoe UI", 9, FontStyle.Bold)
+            };
+            panel.Controls.Add(lblNombre);
+
+            Label lblPrecio = new Label
+            {
+                Text = "$" + item.PrecioUnitario.ToString("F2"),
+                Location = new Point(10, 30),
+                Size = new Size(80, 20),
+                Font = new Font("Segoe UI", 8)
+            };
+            panel.Controls.Add(lblPrecio);
+
+            Label lblCantidad = new Label
+            {
+                Text = "x" + item.Cantidad,
+                Location = new Point(100, 30),
+                Size = new Size(50, 20),
+                Font = new Font("Segoe UI", 8)
+            };
+            panel.Controls.Add(lblCantidad);
+
+            Label lblSubtotal = new Label
+            {
+                Text = "$" + item.Subtotal.ToString("F2"),
+                Location = new Point(panel.Width - 100, 20),
+                Size = new Size(80, 20),
+                Font = new Font("Segoe UI", 10, FontStyle.Bold),
+                ForeColor = Color.FromArgb(220, 38, 38),
+                TextAlign = ContentAlignment.MiddleRight
+            };
+            panel.Controls.Add(lblSubtotal);
+
+            Button btnEliminar = new Button
+            {
+                Text = "✕",
+                Location = new Point(panel.Width - 35, 15),
+                Size = new Size(25, 25),
+                BackColor = Color.FromArgb(239, 68, 68),
+                ForeColor = Color.White,
+                Font = new Font("Segoe UI", 10, FontStyle.Bold),
+                FlatStyle = FlatStyle.Flat
+            };
+            btnEliminar.FlatAppearance.BorderSize = 0;
+            btnEliminar.Click += (s, e) => EliminarDelCarrito(item);
+            panel.Controls.Add(btnEliminar);
+
+            return panel;
+        }
+
+        private void EliminarDelCarrito(CarritoItemDTO item)
+        {
+            carrito.Remove(item);
+            ActualizarCarrito();
+        }
+
+        private void ActualizarTotales()
+        {
+            decimal total = _cajaService.CalcularTotal(carrito);
+            lblTotal.Text = "$" + total.ToString("F2");
+
+            if (decimal.TryParse(txtPago.Text, out decimal pago))
+            {
+                decimal cambio = _cajaService.CalcularCambio(total, pago);
+                lblCambio.Text = "$" + cambio.ToString("F2");
+                btnCompletarVenta.Enabled = _cajaService.ValidarPago(total, pago);
             }
             else
             {
-                lblCarritoVacio.Visible = false;
-
-                foreach (var item in cart)
-                {
-                    Panel itemPanel = new Panel
-                    {
-                        Size = new Size(flowCarrito.Width - 30, 70),
-                        BackColor = Color.FromArgb(250, 250, 250),
-                        BorderStyle = BorderStyle.FixedSingle,
-                        Margin = new Padding(0, 0, 0, 5)
-                    };
-
-                    Label lblNombre = new Label
-                    {
-                        Text = item.Nombre,
-                        Location = new Point(10, 10),
-                        Size = new Size(itemPanel.Width - 100, 20),
-                        Font = new Font("Segoe UI", 10, FontStyle.Bold)
-                    };
-                    itemPanel.Controls.Add(lblNombre);
-
-                    Label lblDetalle = new Label
-                    {
-                        Text = $"${item.Precio:0.00} x {item.Cantidad} = ${item.Subtotal:0.00}",
-                        Location = new Point(10, 35),
-                        Size = new Size(itemPanel.Width - 100, 20),
-                        Font = new Font("Segoe UI", 9),
-                        ForeColor = Color.Gray
-                    };
-                    itemPanel.Controls.Add(lblDetalle);
-
-                    Button btnEliminar = new Button
-                    {
-                        Text = "✕",
-                        Location = new Point(itemPanel.Width - 40, 20),
-                        Size = new Size(30, 30),
-                        BackColor = Color.FromArgb(220, 20, 60),
-                        ForeColor = Color.White,
-                        FlatStyle = FlatStyle.Flat,
-                        Font = new Font("Segoe UI", 12, FontStyle.Bold),
-                        Cursor = Cursors.Hand,
-                        Tag = item
-                    };
-                    btnEliminar.FlatAppearance.BorderSize = 0;
-                    btnEliminar.Click += (s, e) =>
-                    {
-                        cart.Remove(item);
-                        UpdateCart();
-                    };
-                    itemPanel.Controls.Add(btnEliminar);
-
-                    flowCarrito.Controls.Add(itemPanel);
-                }
+                lblCambio.Text = "$0.00";
+                btnCompletarVenta.Enabled = false;
             }
-
-            decimal total = _cajaService.CalcularTotal(cart);
-            lblTotal.Text = "$" + total.ToString("0.00");
-
-            CalculateCambio();
         }
 
         private void TxtPago_TextChanged(object sender, EventArgs e)
         {
-            CalculateCambio();
-        }
-
-        private void CalculateCambio()
-        {
-            decimal total = _cajaService.CalcularTotal(cart);
-            decimal pago = 0;
-
-            if (decimal.TryParse(txtPago.Text, out pago))
-            {
-                decimal cambio = _cajaService.CalcularCambio(total, pago);
-                lblCambio.Text = "Cambio: $" + Math.Abs(cambio).ToString("0.00");
-                lblCambio.ForeColor = cambio >= 0 ? Color.Green : Color.Red;
-
-                bool canComplete = _cajaService.ValidarPago(total, pago) && cart.Count > 0;
-                btnCompletarVenta.Enabled = canComplete;
-                btnCompletarVenta.BackColor = canComplete ?
-                    Color.FromArgb(0, 150, 0) : Color.FromArgb(180, 180, 180);
-            }
-            else
-            {
-                lblCambio.Text = "Cambio: $0.00";
-                btnCompletarVenta.Enabled = false;
-                btnCompletarVenta.BackColor = Color.FromArgb(180, 180, 180);
-            }
+            ActualizarTotales();
         }
 
         private async void BtnCompletarVenta_Click(object sender, EventArgs e)
         {
             try
             {
-                decimal total = _cajaService.CalcularTotal(cart);
-                decimal montoPagado = decimal.Parse(txtPago.Text);
+                if (!carrito.Any())
+                {
+                    MessageBox.Show("El carrito está vacío", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                if (!decimal.TryParse(txtPago.Text, out decimal montoPagado))
+                {
+                    MessageBox.Show("Ingrese un monto válido", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                decimal total = _cajaService.CalcularTotal(carrito);
+                decimal cambio = _cajaService.CalcularCambio(total, montoPagado);
 
                 var venta = new VentaDTO
                 {
-                    ClienteId = clienteId,
-                    EmpleadoId = empleadoId,
-                    Items = cart,
+                    EmpleadoId = _empleadoId,
+                    ClienteId = _clienteId,
+                    Items = carrito,
                     Total = total,
                     MontoPagado = montoPagado,
-                    Cambio = _cajaService.CalcularCambio(total, montoPagado)
+                    Cambio = cambio
                 };
 
-                string codigoPedido = await _cajaService.CompletarVentaAsync(venta);
+                int pedidoId = await _cajaService.CompletarVentaAsync(venta);
 
-                MessageBox.Show($"¡Venta completada exitosamente!\n\nCódigo: {codigoPedido}\nCambio: ${venta.Cambio:0.00}",
-                    "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(
+                    $"Venta completada exitosamente!\n\n" +
+                    $"Pedido #: {pedidoId}\n" +
+                    $"Total: ${total:F2}\n" +
+                    $"Pagado: ${montoPagado:F2}\n" +
+                    $"Cambio: ${cambio:F2}",
+                    "Éxito",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
 
-                cart.Clear();
-                txtPago.Text = "0.00";
-                UpdateCart();
+                // Limpiar
+                carrito.Clear();
+                txtPago.Clear();
+                ActualizarCarrito();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al completar la venta: " + ex.Message,
-                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error al completar la venta: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        //protected override void Dispose(bool disposing)
+        //{
+        //    base.Dispose(disposing);
+        //}
     }
 }

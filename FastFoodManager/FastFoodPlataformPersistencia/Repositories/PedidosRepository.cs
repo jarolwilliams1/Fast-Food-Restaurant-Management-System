@@ -8,8 +8,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FastFoodPlataformPersistencia.Repositories
 {
-  
-
     public class PedidoRepository : IPedidoRepository
     {
         private readonly FastFoodManagerDBContext _context;
@@ -29,17 +27,16 @@ namespace FastFoodPlataformPersistencia.Repositories
             }
             catch (Exception ex)
             {
-                throw new Exception($"Error al crear el pedido: {ex.Message}");
+                throw new Exception($"Error al crear pedido: {ex.Message}");
             }
         }
 
-        public async Task<bool> AgregarItemsPedidoAsync(List<PedidoItem> items)
+        public async Task AgregarItemsPedidoAsync(List<PedidoItem> items)
         {
             try
             {
                 _context.PedidoItems.AddRange(items);
                 await _context.SaveChangesAsync();
-                return true;
             }
             catch (Exception ex)
             {
@@ -53,14 +50,14 @@ namespace FastFoodPlataformPersistencia.Repositories
             {
                 return await _context.Pedidos
                     .Include(p => p.PedidoItems)
-                    .ThenInclude(pi => pi.Producto)
+                        .ThenInclude(pi => pi.Producto)
                     .Include(p => p.Cliente)
                     .Include(p => p.Empleado)
                     .FirstOrDefaultAsync(p => p.Id == id);
             }
             catch (Exception ex)
             {
-                throw new Exception($"Error al obtener el pedido: {ex.Message}");
+                throw new Exception($"Error al obtener pedido: {ex.Message}");
             }
         }
 
@@ -70,7 +67,10 @@ namespace FastFoodPlataformPersistencia.Repositories
             {
                 return await _context.Pedidos
                     .Include(p => p.PedidoItems)
+                    .Include(p => p.Cliente)
+                    .Include(p => p.Empleado)
                     .Where(p => p.Fecha.Date == fecha.Date)
+                    .OrderByDescending(p => p.Fecha)
                     .ToListAsync();
             }
             catch (Exception ex)
@@ -93,6 +93,23 @@ namespace FastFoodPlataformPersistencia.Repositories
             catch (Exception ex)
             {
                 throw new Exception($"Error al obtener todos los pedidos: {ex.Message}");
+            }
+        }
+
+        public async Task ActualizarEstadoPedidoAsync(int pedidoId, string estado)
+        {
+            try
+            {
+                var pedido = await _context.Pedidos.FindAsync(pedidoId);
+                if (pedido != null)
+                {
+                    pedido.Estado = estado;
+                    await _context.SaveChangesAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error al actualizar estado del pedido: {ex.Message}");
             }
         }
     }

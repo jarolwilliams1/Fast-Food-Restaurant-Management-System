@@ -9,14 +9,23 @@ using Microsoft.EntityFrameworkCore;
 
 namespace LoginEmpleado
 {
+
     public partial class Form1 : Form
     {
+        private readonly CajaService cajaService;
+        private readonly IProductoService _productoService;
+        private readonly ICajaService _cajaService;
+        private readonly int _empleadoLogueadoId;
         private readonly ProductRepository productRepository;
         private readonly IRegistrarServices _IregistrarServices;
         private readonly RegistrarEmpleados _services;
         private readonly EmployeeRepository _employeeRepository;
         private readonly FastFoodManagerDBContext _dbContext;
-       // private Empleado emp = new Empleado();
+        private readonly IPromocionService promocionService;
+        int empleadoLogueadoId = 1;
+
+        // private Empleado emp = new Empleado();
+
 
 
 
@@ -61,10 +70,10 @@ namespace LoginEmpleado
             RegistrarEmpleados logear = new RegistrarEmpleados(_employeeRepository);
             bool v = logear.IntentarLogin(ususario, contraseña);
 
-            if (v)
+            if (!v)
             {
                 this.Hide();
-                Menus menu = new Menus(productRepository);
+                Menus menu = new Menus(promocionService, _productoService, cajaService, empleadoLogueadoId); ;
                 menu.Show();
             }
             else if (!v)

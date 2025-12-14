@@ -1,20 +1,17 @@
-﻿using FastFoodManagerPlataformDomain.Entites;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using FastFoodManagerPlataformDomain.Entites;
 
-namespace FastFoodManagerPlataformDomain.Interfaces
+namespace FastFoodPlataformPersistencia.Repositories
 {
     public interface IProductsRepository
     {
-        Task AgregarProductoAsync(Producto p);
-        Task EliminarProductoAsync(int id);
-        Task ActualizarProductoAsync(Producto p);
         Task<List<Producto>> ObtenerProductosAsync();
         Task<List<Producto>> ObtenerProductosDisponiblesAsync();
-        Task<Producto> ObtenerProductoPorIdAsync(int id);
         Task<List<Producto>> ObtenerProductosPorCategoriaAsync(string categoria);
+        Task<Producto> ObtenerProductoPorIdAsync(int id);
+        Task AgregarProductoAsync(Producto producto);
+        Task ActualizarProductoAsync(Producto producto);
+        Task EliminarProductoAsync(int id);
     }
 }

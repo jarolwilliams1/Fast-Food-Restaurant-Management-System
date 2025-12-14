@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FastFoodPlataformPersistencia")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9d71dfd6d607aed507bda4ec9cab80662df9df38")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7f52a6441e10ffdde6c6c8ae18ca89946d6f32ac")]
 [assembly: System.Reflection.AssemblyProductAttribute("FastFoodPlataformPersistencia")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FastFoodPlataformPersistencia")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

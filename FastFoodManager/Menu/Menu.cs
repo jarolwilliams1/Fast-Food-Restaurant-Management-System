@@ -7,18 +7,22 @@ namespace Menu
     public partial class Menus : Form
     {
         // ✅ CORRECTO: Usar SERVICIOS, no repositorios
+        private readonly IPromocionService _promocionService;
         private readonly IProductoService _productoService;
         private readonly ICajaService _cajaService;
         private readonly int _empleadoLogueadoId;
 
         // Constructor con inyección de dependencias de SERVICIOS
-        public Menus(IProductoService productoService, ICajaService cajaService, int empleadoId)
+        public Menus(IPromocionService promocionService, IProductoService productoService, ICajaService cajaService, int empleadoId)
         {
             InitializeComponent();
             AutoScroll = true;
             _productoService = productoService;
             _cajaService = cajaService;
-            _empleadoLogueadoId = empleadoId;
+           _empleadoLogueadoId = empleadoId;
+           // _promocionService = promocionService ?? throw new ArgumentNullException(nameof(promocionService));
+            //PromocionesForm promoycombos = new PromocionesForm(_promocionService, _productoService);
+
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)
@@ -63,6 +67,13 @@ namespace Menu
 
             CajaForm cajaForm = new CajaForm(_cajaService, _empleadoLogueadoId, clienteId);
             cajaForm.Show(); // Para abrir como ventana independiente
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+            PromocionesForm promoycombos = new PromocionesForm(_promocionService, _productoService);
+            promoycombos.Show();
+            
         }
     }
 }

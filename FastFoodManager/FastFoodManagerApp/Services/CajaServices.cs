@@ -8,27 +8,6 @@ using System.Threading.Tasks;
 
 namespace FastFoodManagerApp.Services
 {
-    public class CarritoItemDTO
-    {
-        public int ProductoId { get; set; }
-        public string Nombre { get; set; }
-        public decimal Precio { get; set; }
-        public int Cantidad { get; set; }
-        public decimal Subtotal => Precio * Cantidad;
-    }
-
-    public class VentaDTO
-    {
-        public int ClienteId { get; set; }
-        public int EmpleadoId { get; set; }
-        public List<CarritoItemDTO> Items { get; set; }
-        public decimal Total { get; set; }
-        public decimal MontoPagado { get; set; }
-        public decimal Cambio { get; set; }
-    }
-
-  
-
     public class CajaService : ICajaService
     {
         private readonly IProductsRepository _productRepository;
@@ -52,21 +31,16 @@ namespace FastFoodManagerApp.Services
             }
         }
 
-        public async Task<string> CompletarVentaAsync(VentaDTO venta)
+        public async Task<int> CompletarVentaAsync(VentaDTO venta)
         {
             try
             {
-                // Validar que hay items
-                if (venta.Items == null || venta.Items.Count == 0)
-                {
-                    throw new Exception("No hay productos en el carrito");
-                }
+                // Validaciones
+                if (venta.Items == null || !venta.Items.Any())
+                    throw new ArgumentException("El carrito está vacío");
 
-                // Validar pago suficiente
                 if (!ValidarPago(venta.Total, venta.MontoPagado))
-                {
-                    throw new Exception("El monto pagado es insuficiente");
-                }
+                    throw new ArgumentException("El monto pagado es insuficiente");
 
                 // Crear el pedido
                 var pedido = new Pedido
@@ -80,23 +54,20 @@ namespace FastFoodManagerApp.Services
 
                 var pedidoCreado = await _pedidoRepository.CrearPedidoAsync(pedido);
 
-                // Generar código de pedido
-                string codigoPedido = $"PED-{pedidoCreado.Id}-{DateTime.Now:yyyyMMddHHmmss}";
-
                 // Crear los items del pedido
                 var pedidoItems = venta.Items.Select(item => new PedidoItem
                 {
-                    CodigoPedido = codigoPedido,
                     PedidoId = pedidoCreado.Id,
                     ProductoId = item.ProductoId,
                     Cantidad = item.Cantidad,
-                    PrecioUnitario = item.Precio,
-                    Subtotal = item.Subtotal
+                    PrecioUnitario = item.PrecioUnitario,
+                    Subtotal = item.Subtotal,
+                    CodigoPedido = $"PED-{pedidoCreado.Id}-{DateTime.Now:yyyyMMddHHmmss}"
                 }).ToList();
 
                 await _pedidoRepository.AgregarItemsPedidoAsync(pedidoItems);
 
-                return codigoPedido;
+                return pedidoCreado.Id;
             }
             catch (Exception ex)
             {
@@ -106,7 +77,7 @@ namespace FastFoodManagerApp.Services
 
         public decimal CalcularTotal(List<CarritoItemDTO> items)
         {
-            if (items == null || items.Count == 0)
+            if (items == null || !items.Any())
                 return 0;
 
             return items.Sum(item => item.Subtotal);
@@ -114,12 +85,15 @@ namespace FastFoodManagerApp.Services
 
         public decimal CalcularCambio(decimal total, decimal montoPagado)
         {
+            if (montoPagado < total)
+                return 0;
+
             return montoPagado - total;
         }
 
         public bool ValidarPago(decimal total, decimal montoPagado)
         {
-            return montoPagado >= total && total > 0;
+            return montoPagado >= total;
         }
     }
 }
