@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net9.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FastFoodManagerApp\FastFoodManagerApp.csproj" />
+    <ProjectReference Include="..\LoginEmpleado\LoginEmpleado.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="CarritoItem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="ProductoCard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+  </ItemGroup>
+
+</Project>

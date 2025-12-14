@@ -11,6 +11,7 @@ namespace LoginEmpleado
 {
     public partial class Form1 : Form
     {
+        private readonly ProductRepository productRepository;
         private readonly IRegistrarServices _IregistrarServices;
         private readonly RegistrarEmpleados _services;
         private readonly EmployeeRepository _employeeRepository;
@@ -63,7 +64,7 @@ namespace LoginEmpleado
             if (v)
             {
                 this.Hide();
-                Menus menu = new Menus();
+                Menus menu = new Menus(productRepository);
                 menu.Show();
             }
             else if (!v)

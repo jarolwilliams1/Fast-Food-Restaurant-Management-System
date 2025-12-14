@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Caja\Caja.csproj" />
     <ProjectReference Include="..\FastFoodPlataformPersistencia\FastFoodPlataformPersistencia.csproj" />
   </ItemGroup>
 

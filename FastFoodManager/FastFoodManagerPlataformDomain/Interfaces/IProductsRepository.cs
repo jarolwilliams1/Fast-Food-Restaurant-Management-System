@@ -9,7 +9,12 @@ namespace FastFoodManagerPlataformDomain.Interfaces
 {
     public interface IProductsRepository
     {
-        void AgregarProducto(Producto p);
-        void EliminarProducto(Producto p);
+        Task AgregarProductoAsync(Producto p);
+        Task EliminarProductoAsync(int id);
+        Task ActualizarProductoAsync(Producto p);
+        Task<List<Producto>> ObtenerProductosAsync();
+        Task<List<Producto>> ObtenerProductosDisponiblesAsync();
+        Task<Producto> ObtenerProductoPorIdAsync(int id);
+        Task<List<Producto>> ObtenerProductosPorCategoriaAsync(string categoria);
     }
 }

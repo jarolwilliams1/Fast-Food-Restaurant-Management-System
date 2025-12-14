@@ -35,10 +35,12 @@
             label3 = new Label();
             groupBox3 = new GroupBox();
             groupBox4 = new GroupBox();
-            groupBox5 = new GroupBox();
             label4 = new Label();
+            groupBox5 = new GroupBox();
+            label5 = new Label();
             groupBox1.SuspendLayout();
             Gpedidos.SuspendLayout();
+            groupBox3.SuspendLayout();
             groupBox4.SuspendLayout();
             SuspendLayout();
             // 
@@ -103,6 +105,7 @@
             // groupBox3
             // 
             groupBox3.BackColor = Color.FromArgb(0, 192, 0);
+            groupBox3.Controls.Add(label5);
             groupBox3.Location = new Point(1418, 330);
             groupBox3.Name = "groupBox3";
             groupBox3.Size = new Size(942, 446);
@@ -119,15 +122,6 @@
             groupBox4.TabIndex = 0;
             groupBox4.TabStop = false;
             // 
-            // groupBox5
-            // 
-            groupBox5.BackColor = Color.DarkOrchid;
-            groupBox5.Location = new Point(1418, 842);
-            groupBox5.Name = "groupBox5";
-            groupBox5.Size = new Size(942, 446);
-            groupBox5.TabIndex = 3;
-            groupBox5.TabStop = false;
-            // 
             // label4
             // 
             label4.AutoSize = true;
@@ -137,6 +131,25 @@
             label4.TabIndex = 4;
             label4.Text = "Gestión Menu";
             label4.Click += label4_Click;
+            // 
+            // groupBox5
+            // 
+            groupBox5.BackColor = Color.DarkOrchid;
+            groupBox5.Location = new Point(1418, 842);
+            groupBox5.Name = "groupBox5";
+            groupBox5.Size = new Size(942, 446);
+            groupBox5.TabIndex = 3;
+            groupBox5.TabStop = false;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(391, 228);
+            label5.Name = "label5";
+            label5.Size = new Size(59, 32);
+            label5.TabIndex = 0;
+            label5.Text = "Caja";
+            label5.Click += label5_Click;
             // 
             // Menus
             // 
@@ -155,6 +168,8 @@
             groupBox1.PerformLayout();
             Gpedidos.ResumeLayout(false);
             Gpedidos.PerformLayout();
+            groupBox3.ResumeLayout(false);
+            groupBox3.PerformLayout();
             groupBox4.ResumeLayout(false);
             groupBox4.PerformLayout();
             ResumeLayout(false);
@@ -171,5 +186,6 @@
         private Label label1;
         private Label label3;
         private Label label4;
+        private Label label5;
     }
 }

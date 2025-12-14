@@ -1,6 +1,6 @@
 ﻿namespace Caja
 {
-    partial class ProductoCard
+    partial class Flowproductocard
     {
         /// <summary> 
         /// Variable del diseñador necesaria.
@@ -30,6 +30,7 @@
         {
             lblNombre = new Label();
             lblPrecio = new Label();
+            flproduct = new FlowLayoutPanel();
             SuspendLayout();
             // 
             // lblNombre
@@ -51,14 +52,23 @@
             lblPrecio.Text = "label1";
             lblPrecio.Click += label1_Click;
             // 
-            // ProductoCard
+            // flproduct
+            // 
+            flproduct.Location = new Point(38, 12);
+            flproduct.Name = "flproduct";
+            flproduct.Size = new Size(346, 181);
+            flproduct.TabIndex = 2;
+            // 
+            // Flowproductocard
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.Coral;
             Controls.Add(lblPrecio);
             Controls.Add(lblNombre);
-            Name = "ProductoCard";
-            Size = new Size(520, 211);
+            Controls.Add(flproduct);
+            Name = "Flowproductocard";
+            Size = new Size(441, 205);
             Load += ProductoCard_Load;
             ResumeLayout(false);
             PerformLayout();
@@ -68,5 +78,6 @@
 
         private Label lblNombre;
         private Label lblPrecio;
+        private FlowLayoutPanel flproduct;
     }
 }

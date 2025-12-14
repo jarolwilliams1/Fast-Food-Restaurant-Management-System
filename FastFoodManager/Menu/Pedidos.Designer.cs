@@ -1,4 +1,6 @@
-﻿namespace Menu
+﻿using System.Windows.Forms;
+
+namespace Menu
 {
     partial class Pedidos
     {
@@ -204,6 +206,7 @@
             // 
             // Pedidos
             // 
+            AutoScroll = true;
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(2564, 1399);
