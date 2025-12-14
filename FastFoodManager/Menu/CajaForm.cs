@@ -340,8 +340,8 @@ namespace Menu
                 carrito.Add(new CarritoItemDTO
                 {
                     ProductoId = producto.Id,
-                    NombreProducto = producto.Nombre,
-                    PrecioUnitario = producto.Precio,
+                    Nombre = producto.Nombre,
+                    Precio = producto.Precio,
                     Cantidad = 1
                 });
             }
@@ -376,7 +376,7 @@ namespace Menu
 
             Label lblNombre = new Label
             {
-                Text = item.NombreProducto,
+                Text = item.Nombre,
                 Location = new Point(10, 10),
                 Size = new Size(200, 20),
                 Font = new Font("Segoe UI", 9, FontStyle.Bold)
@@ -385,7 +385,7 @@ namespace Menu
 
             Label lblPrecio = new Label
             {
-                Text = "$" + item.PrecioUnitario.ToString("F2"),
+                Text = "$" + item.Precio.ToString("F2"),
                 Location = new Point(10, 30),
                 Size = new Size(80, 20),
                 Font = new Font("Segoe UI", 8)
@@ -487,11 +487,11 @@ namespace Menu
                     Cambio = cambio
                 };
 
-                int pedidoId = await _cajaService.CompletarVentaAsync(venta);
+               // int pedidoId = await _cajaService.CompletarVentaAsync(venta);
 
                 MessageBox.Show(
                     $"Venta completada exitosamente!\n\n" +
-                    $"Pedido #: {pedidoId}\n" +
+                    $"Pedido #: \n" +
                     $"Total: ${total:F2}\n" +
                     $"Pagado: ${montoPagado:F2}\n" +
                     $"Cambio: ${cambio:F2}",

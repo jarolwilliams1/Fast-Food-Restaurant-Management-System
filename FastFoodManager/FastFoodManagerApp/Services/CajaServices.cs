@@ -1,22 +1,27 @@
-﻿using FastFoodManagerPlataformDomain.Entites;
-using FastFoodManagerPlataformDomain.Interfaces;
-using FastFoodPlataformPersistencia.Repositories;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FastFoodManagerPlataformDomain.Entites;
+using FastFoodPlataformPersistencia.Repositories;
 
 namespace FastFoodManagerApp.Services
 {
+
+
+   
+
+
+
     public class CajaService : ICajaService
     {
         private readonly IProductsRepository _productRepository;
         private readonly IPedidoRepository _pedidoRepository;
 
-        public CajaService(IProductsRepository productRepository, IPedidoRepository pedidoRepository)
+        public CajaService(IProductsRepository productRepository, IPedidoRepository repo)
         {
             _productRepository = productRepository;
-            _pedidoRepository = pedidoRepository;
+            _pedidoRepository = repo;
         }
 
         public async Task<List<Producto>> ObtenerProductosDisponiblesAsync()
@@ -31,43 +36,53 @@ namespace FastFoodManagerApp.Services
             }
         }
 
-        public async Task<int> CompletarVentaAsync(VentaDTO venta)
+        public async Task<string> CompletarVentaAsync(VentaDTO venta)
         {
             try
             {
-                // Validaciones
-                if (venta.Items == null || !venta.Items.Any())
-                    throw new ArgumentException("El carrito está vacío");
+                // Validar que hay items
+                if (venta.Items == null || venta.Items.Count == 0)
+                {
+                    throw new Exception("No hay productos en el carrito");
+                }
 
+                // Validar pago suficiente
                 if (!ValidarPago(venta.Total, venta.MontoPagado))
-                    throw new ArgumentException("El monto pagado es insuficiente");
+                {
+                    throw new Exception("El monto pagado es insuficiente");
+                }
 
-                // Crear el pedido
+                // Crear el pedido en la base de datos
                 var pedido = new Pedido
                 {
                     Fecha = DateTime.Now,
                     ClienteId = venta.ClienteId,
                     EmpleadoId = venta.EmpleadoId,
                     Total = venta.Total,
-                    Estado = "Completado"
+                    Estado = "Completado" // Estado cuando se completa desde la caja
                 };
 
                 var pedidoCreado = await _pedidoRepository.CrearPedidoAsync(pedido);
 
-                // Crear los items del pedido
+                // Generar código de pedido único
+                string codigoPedido = $"PED-{pedidoCreado.Id}-{DateTime.Now:yyyyMMddHHmmss}";
+
+                // Crear los items del pedido en la base de datos
                 var pedidoItems = venta.Items.Select(item => new PedidoItem
                 {
+                    CodigoPedido = codigoPedido,
                     PedidoId = pedidoCreado.Id,
                     ProductoId = item.ProductoId,
+                    ComboId = null, // Por ahora solo manejamos productos, no combos
                     Cantidad = item.Cantidad,
-                    PrecioUnitario = item.PrecioUnitario,
-                    Subtotal = item.Subtotal,
-                    CodigoPedido = $"PED-{pedidoCreado.Id}-{DateTime.Now:yyyyMMddHHmmss}"
+                    PrecioUnitario = item.Precio,
+                    Subtotal = item.Subtotal
                 }).ToList();
 
+                // Guardar los items en la base de datos
                 await _pedidoRepository.AgregarItemsPedidoAsync(pedidoItems);
 
-                return pedidoCreado.Id;
+                return codigoPedido;
             }
             catch (Exception ex)
             {
@@ -77,7 +92,7 @@ namespace FastFoodManagerApp.Services
 
         public decimal CalcularTotal(List<CarritoItemDTO> items)
         {
-            if (items == null || !items.Any())
+            if (items == null || items.Count == 0)
                 return 0;
 
             return items.Sum(item => item.Subtotal);
@@ -85,15 +100,12 @@ namespace FastFoodManagerApp.Services
 
         public decimal CalcularCambio(decimal total, decimal montoPagado)
         {
-            if (montoPagado < total)
-                return 0;
-
             return montoPagado - total;
         }
 
         public bool ValidarPago(decimal total, decimal montoPagado)
         {
-            return montoPagado >= total;
+            return montoPagado >= total && total > 0;
         }
     }
 }

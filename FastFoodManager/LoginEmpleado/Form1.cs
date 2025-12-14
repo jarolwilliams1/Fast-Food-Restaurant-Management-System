@@ -73,7 +73,7 @@ namespace LoginEmpleado
             if (!v)
             {
                 this.Hide();
-                Menus menu = new Menus(promocionService, _productoService, cajaService, empleadoLogueadoId); ;
+                Menus menu = new Menus((IProductoService)promocionService, (ICajaService)_productoService, (IPedidoService)cajaService, empleadoLogueadoId); ;
                 menu.Show();
             }
             else if (!v)
@@ -114,24 +114,7 @@ namespace LoginEmpleado
             var ResgistarNuevos = new ResgistarNuevos();
                 ResgistarNuevos.Show();
 
-           // Application.Exit();
-
-
-
-
-            //this.Hide();
-
-
-            //this.Hide();
-            //bool verEste = true;
-
-
-            //this.Show();
-
-
-
-            //this.Show();
-            // ResgistarNuevos.ActiveForm
+        
 
         }
 
@@ -144,24 +127,6 @@ namespace LoginEmpleado
         {
 
         }
-        //private void button1_Click(object sender, EventArgs e, RegistrarEmpleados registrarEmpleados)
-        //{
-        //    var ususario = textBox1.Text;
-        //    var contraseña = textBox2.Text;
-        //    var v = registrarEmpleados.IntentarLogin(ususario, contraseña);
-
-        //    if (v == true)
-        //    {
-        //          Menus menu = new Menus();
-        //        menu.Show();
-        //    }
-        //    else
-        //    {
-        //        MessageBox.Show("ususario o contraseña incorrecto");
-        //    }
-           
-            
-        //    //throw new NotImplementedException();
-        //}
+        
     }
 }

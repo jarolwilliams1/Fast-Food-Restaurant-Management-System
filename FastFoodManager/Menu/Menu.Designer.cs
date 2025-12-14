@@ -156,13 +156,13 @@
             // 
             // label6
             // 
-            label6.AutoSize = true;
-            label6.Location = new Point(402, 214);
-            label6.Name = "label6";
-            label6.Size = new Size(78, 32);
-            label6.TabIndex = 0;
-            label6.Text = "label6";
-            label6.Click += label6_Click;
+            //label6.AutoSize = true;
+            //label6.Location = new Point(402, 214);
+            //label6.Name = "label6";
+            //label6.Size = new Size(78, 32);
+            //label6.TabIndex = 0;
+            //label6.Text = "label6";
+            //label6.Click += label6_Click;
             // 
             // Menus
             // 

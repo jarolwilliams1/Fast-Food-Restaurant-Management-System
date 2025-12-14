@@ -1,28 +1,26 @@
-﻿using System;
+﻿using FastFoodManagerApp.Services;
+using FastFoodManagerPlataformDomain.Entites;
+using System;
 using System.Windows.Forms;
-using FastFoodManagerApp.Services;
 
 namespace Menu
 {
     public partial class Menus : Form
     {
-        // ✅ CORRECTO: Usar SERVICIOS, no repositorios
-        private readonly IPromocionService _promocionService;
         private readonly IProductoService _productoService;
         private readonly ICajaService _cajaService;
+        private readonly IPedidoService _pedidoService; // ✅ NUEVO
         private readonly int _empleadoLogueadoId;
 
-        // Constructor con inyección de dependencias de SERVICIOS
-        public Menus(IPromocionService promocionService, IProductoService productoService, ICajaService cajaService, int empleadoId)
+        // Constructor actualizado con el servicio de pedidos
+        public Menus(IProductoService productoService, ICajaService cajaService, IPedidoService pedidoService, int empleadoId)
         {
             InitializeComponent();
             AutoScroll = true;
             _productoService = productoService;
             _cajaService = cajaService;
-           _empleadoLogueadoId = empleadoId;
-           // _promocionService = promocionService ?? throw new ArgumentNullException(nameof(promocionService));
-            //PromocionesForm promoycombos = new PromocionesForm(_promocionService, _productoService);
-
+            _pedidoService = pedidoService; // ✅ NUEVO
+            _empleadoLogueadoId = empleadoId;
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)
@@ -43,9 +41,8 @@ namespace Menu
 
         private void label3_Click(object sender, EventArgs e)
         {
-            // Aquí también deberías inyectar el servicio de pedidos
-            // Por ahora lo dejamos así si no lo tienes implementado
-            var GestionPedidos = new Pedidos();
+            //  Ahora inyecta el servicio de pedidos
+            var GestionPedidos = new Pedidos( _pedidoService);
             GestionPedidos.Show();
         }
 
@@ -55,25 +52,15 @@ namespace Menu
 
         private void label4_Click(object sender, EventArgs e)
         {
-            // ✅ CORRECTO: Pasar el servicio, no el repositorio
             var GestionProductos = new Productos(_productoService);
             GestionProductos.Show();
         }
 
         private void label5_Click(object sender, EventArgs e)
         {
-            // ✅ CORRECTO: Pasar todos los parámetros necesarios
-            int clienteId = 1; // Cliente genérico para ventas de mostrador
-
+            int clienteId = 1;
             CajaForm cajaForm = new CajaForm(_cajaService, _empleadoLogueadoId, clienteId);
-            cajaForm.Show(); // Para abrir como ventana independiente
-        }
-
-        private void label6_Click(object sender, EventArgs e)
-        {
-            PromocionesForm promoycombos = new PromocionesForm(_promocionService, _productoService);
-            promoycombos.Show();
-            
+            cajaForm.Show();
         }
     }
 }
